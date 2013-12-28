@@ -28,7 +28,7 @@
 
     ~ What terminals are supported?
 
-      Termcolor supports ANSII color formatting. This formatting is
+      Termcolor supports ANSI color formatting. This formatting is
       supported by most popular terminals on Linux, Unix and Mac OS.
 
       NOTE: Windows support will be added later
@@ -36,4 +36,4 @@
 
     ~ Where the docs?
 
-      The link to be announced.
+      http://termcolor.readthedocs.org/

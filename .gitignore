@@ -1,2 +1,3 @@
 *.o
 build/
+docs/_build

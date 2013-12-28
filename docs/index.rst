@@ -27,9 +27,7 @@ How to use?
 -----------
 
 It's very easy to use. The idea is based on the use of C++ stream
-manipulators. The typical «Hello World» application is below.
-
-.. code::
+manipulators. The typical «Hello World» application is below::
 
     #include <iostream>
     #include <termcolor/termcolor.hpp>
@@ -43,9 +41,7 @@ manipulators. The typical «Hello World» application is below.
 
 The application above prints a string with red. It's obvious, isn't it?
 There is a one problem that is not obvious for the unexperienced users.
-If you write something this way:
-
-.. code::
+If you write something this way::
 
     std::cout << termcolor::red << "Hello, Colorful World!" << std::endl;
     std::cout << "Here I'm!" << std::endl;
@@ -53,9 +49,7 @@ If you write something this way:
 the phrase «Here I'm» will be printed with red too. Why? Because you don't
 reset termcolor's setting. So if you want to print text wit default terminal
 setting you have to reset termcolor's settings. It can be done by using
-``termcolor::reset`` manipulator:
-
-.. code::
+``termcolor::reset`` manipulator::
 
     std::cout << termcolor::red << "Hello, Colorful World!" << std::endl;
     std::cout << termcolor::reset << "Here I'm!" << std::endl;

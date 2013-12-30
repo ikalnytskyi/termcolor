@@ -31,8 +31,6 @@
       Termcolor supports ANSI color formatting. This formatting is
       supported by most popular terminals on Linux, Unix and Mac OS.
 
-      NOTE: Windows support will be added later
-
 
     ~ Where the docs?
 

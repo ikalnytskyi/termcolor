@@ -8,8 +8,8 @@ library for printing colored messages to the terminal. Written just for
 fun with a help of `the Force`_.
 
 Termcolor uses `ANSI color formatting`_, so you can use it on every system
-that is used such terminals (Linux, Unix, Mac OS).  In the near future
-Windows support will be added.
+that is used such terminals (Linux, Unix, Mac OS).  On Windows, the WinAPI
+used instead, but some restrictions are applied.
 
 .. _termcolor: https://github.com/ikalnitsky/termcolor
 .. _the Force: http://starwars.wikia.com/wiki/The_Force
@@ -93,6 +93,8 @@ Background manipulators
 
 Attribute manipulators
 ......................
+
+For now, this manipulators don't work on Windows.
 
 #. ``termcolor::bold``
 #. ``termcolor::dark``

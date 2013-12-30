@@ -28,11 +28,13 @@
 
 // This headers provides the `isatty()`/`fileno()` functions,
 // which are used for testing whether a standart stream refers
-// to the terminal.
+// to the terminal. As for Windows, we also need WinApi funcs
+// for changing colors attributes of the terminal.
 #if defined(OS_MACOS) || defined(OS_LINUX)
 #   include <unistd.h>
 #elif defined(OS_WINDOWS)
 #   include <io.h>
+#   include <windows.h>
 #endif
 
 
@@ -47,6 +49,10 @@ namespace termcolor
     // All comments are below.
     namespace __internal
     {
+    #if defined(OS_WINDOWS)
+        void win_change_attributes(std::ostream& stream, int foreground, int background=-1);
+    #endif
+
         inline FILE* get_standard_stream(const std::ostream& stream);
         inline bool is_atty(const std::ostream& stream);
     }
@@ -56,7 +62,13 @@ namespace termcolor
     std::ostream& reset(std::ostream& stream)
     {
         if (__internal::is_atty(stream))
+        {
+        #if defined(OS_MACOS) || defined(OS_LINUX)
             stream << "\033[00m";
+        #elif defined(OS_WINDOWS)
+            __internal::win_change_attributes(stream, -1, -1);
+        #endif
+        }
         return stream;
     }
 
@@ -65,7 +77,12 @@ namespace termcolor
     std::ostream& bold(std::ostream& stream)
     {
         if (__internal::is_atty(stream))
+        {
+        #if defined(OS_MACOS) || defined(OS_LINUX)
             stream << "\033[1m";
+        #elif defined(OS_WINDOWS)
+        #endif
+        }
         return stream;
     }
 
@@ -74,7 +91,12 @@ namespace termcolor
     std::ostream& dark(std::ostream& stream)
     {
         if (__internal::is_atty(stream))
+        {
+        #if defined(OS_MACOS) || defined(OS_LINUX)
             stream << "\033[2m";
+        #elif defined(OS_WINDOWS)
+        #endif
+        }
         return stream;
     }
 
@@ -83,7 +105,12 @@ namespace termcolor
     std::ostream& underline(std::ostream& stream)
     {
         if (__internal::is_atty(stream))
+        {
+        #if defined(OS_MACOS) || defined(OS_LINUX)
             stream << "\033[4m";
+        #elif defined(OS_WINDOWS)
+        #endif
+        }
         return stream;
     }
 
@@ -92,7 +119,12 @@ namespace termcolor
     std::ostream& blink(std::ostream& stream)
     {
         if (__internal::is_atty(stream))
+        {
+        #if defined(OS_MACOS) || defined(OS_LINUX)
             stream << "\033[5m";
+        #elif defined(OS_WINDOWS)
+        #endif
+        }
         return stream;
     }
 
@@ -101,7 +133,12 @@ namespace termcolor
     std::ostream& reverse(std::ostream& stream)
     {
         if (__internal::is_atty(stream))
+        {
+        #if defined(OS_MACOS) || defined(OS_LINUX)
             stream << "\033[7m";
+        #elif defined(OS_WINDOWS)
+        #endif
+        }
         return stream;
     }
 
@@ -110,7 +147,12 @@ namespace termcolor
     std::ostream& concealed(std::ostream& stream)
     {
         if (__internal::is_atty(stream))
+        {
+        #if defined(OS_MACOS) || defined(OS_LINUX)
             stream << "\033[8m";
+        #elif defined(OS_WINDOWS)
+        #endif
+        }
         return stream;
     }
 
@@ -119,7 +161,13 @@ namespace termcolor
     std::ostream& grey(std::ostream& stream)
     {
         if (__internal::is_atty(stream))
+        {
+        #if defined(OS_MACOS) || defined(OS_LINUX)
             stream << "\033[30m";
+        #elif defined(OS_WINDOWS)
+            __internal::win_change_attributes(stream, 0);
+        #endif
+        }
         return stream;
     }
 
@@ -127,7 +175,13 @@ namespace termcolor
     std::ostream& red(std::ostream& stream)
     {
         if (__internal::is_atty(stream))
+        {
+        #if defined(OS_MACOS) || defined(OS_LINUX)
             stream << "\033[31m";
+        #elif defined(OS_WINDOWS)
+            __internal::win_change_attributes(stream, FOREGROUND_RED);
+        #endif
+        }  
         return stream;
     }
 
@@ -135,7 +189,13 @@ namespace termcolor
     std::ostream& green(std::ostream& stream)
     {
         if (__internal::is_atty(stream))
+        {
+        #if defined(OS_MACOS) || defined(OS_LINUX)
             stream << "\033[32m";
+        #elif defined(OS_WINDOWS)
+            __internal::win_change_attributes(stream, FOREGROUND_GREEN);
+        #endif
+        }
         return stream;
     }
 
@@ -143,7 +203,13 @@ namespace termcolor
     std::ostream& yellow(std::ostream& stream)
     {
         if (__internal::is_atty(stream))
+        {
+        #if defined(OS_MACOS) || defined(OS_LINUX)
             stream << "\033[33m";
+        #elif defined(OS_WINDOWS)
+            __internal::win_change_attributes(stream, FOREGROUND_GREEN | FOREGROUND_RED);
+        #endif
+        }
         return stream;
     }
 
@@ -151,7 +217,13 @@ namespace termcolor
     std::ostream& blue(std::ostream& stream)
     {
         if (__internal::is_atty(stream))
+        {
+        #if defined(OS_MACOS) || defined(OS_LINUX)
             stream << "\033[34m";
+        #elif defined(OS_WINDOWS)
+            __internal::win_change_attributes(stream, FOREGROUND_BLUE);
+        #endif
+        }
         return stream;
     }
 
@@ -159,7 +231,13 @@ namespace termcolor
     std::ostream& magenta(std::ostream& stream)
     {
         if (__internal::is_atty(stream))
+        {
+        #if defined(OS_MACOS) || defined(OS_LINUX)
             stream << "\033[35m";
+        #elif defined(OS_WINDOWS)
+            __internal::win_change_attributes(stream, FOREGROUND_BLUE | FOREGROUND_RED);
+        #endif
+        }
         return stream;
     }
 
@@ -167,7 +245,13 @@ namespace termcolor
     std::ostream& cyan(std::ostream& stream)
     {
         if (__internal::is_atty(stream))
+        {
+        #if defined(OS_MACOS) || defined(OS_LINUX)
             stream << "\033[36m";
+        #elif defined(OS_WINDOWS)
+            __internal::win_change_attributes(stream, FOREGROUND_BLUE | FOREGROUND_GREEN);
+        #endif
+        }
         return stream;
     }
 
@@ -175,7 +259,13 @@ namespace termcolor
     std::ostream& white(std::ostream& stream)
     {
         if (__internal::is_atty(stream))
+        {
+        #if defined(OS_MACOS) || defined(OS_LINUX)
             stream << "\033[37m";
+        #elif defined(OS_WINDOWS)
+            __internal::win_change_attributes(stream, FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED);
+        #endif
+        }
         return stream;
     }
 
@@ -185,7 +275,13 @@ namespace termcolor
     std::ostream& on_grey(std::ostream& stream)
     {
         if (__internal::is_atty(stream))
+        {
+        #if defined(OS_MACOS) || defined(OS_LINUX)
             stream << "\033[40m";
+        #elif defined(OS_WINDOWS)
+            __internal::win_change_attributes(stream, -1, 0);
+        #endif
+        }
         return stream;
     }
 
@@ -193,7 +289,13 @@ namespace termcolor
     std::ostream& on_red(std::ostream& stream)
     {
         if (__internal::is_atty(stream))
+        {
+        #if defined(OS_MACOS) || defined(OS_LINUX)
             stream << "\033[41m";
+        #elif defined(OS_WINDOWS)
+            __internal::win_change_attributes(stream, -1, BACKGROUND_RED);
+        #endif
+        }
         return stream;
     }
 
@@ -201,7 +303,13 @@ namespace termcolor
     std::ostream& on_green(std::ostream& stream)
     {
         if (__internal::is_atty(stream))
+        {
+        #if defined(OS_MACOS) || defined(OS_LINUX)
             stream << "\033[42m";
+        #elif defined(OS_WINDOWS)
+            __internal::win_change_attributes(stream, -1, BACKGROUND_GREEN);
+        #endif
+        }
         return stream;
     }
 
@@ -209,7 +317,13 @@ namespace termcolor
     std::ostream& on_yellow(std::ostream& stream)
     {
         if (__internal::is_atty(stream))
+        {
+        #if defined(OS_MACOS) || defined(OS_LINUX)
             stream << "\033[43m";
+        #elif defined(OS_WINDOWS)
+            __internal::win_change_attributes(stream, -1, BACKGROUND_GREEN | BACKGROUND_RED);
+        #endif
+        }
         return stream;
     }
 
@@ -217,7 +331,13 @@ namespace termcolor
     std::ostream& on_blue(std::ostream& stream)
     {
         if (__internal::is_atty(stream))
+        {
+        #if defined(OS_MACOS) || defined(OS_LINUX)
             stream << "\033[44m";
+        #elif defined(OS_WINDOWS)
+            __internal::win_change_attributes(stream, -1, BACKGROUND_BLUE);
+        #endif
+        }
         return stream;
     }
 
@@ -225,7 +345,13 @@ namespace termcolor
     std::ostream& on_magenta(std::ostream& stream)
     {
         if (__internal::is_atty(stream))
+        {
+        #if defined(OS_MACOS) || defined(OS_LINUX)
             stream << "\033[45m";
+        #elif defined(OS_WINDOWS)
+            __internal::win_change_attributes(stream, -1, BACKGROUND_BLUE | BACKGROUND_RED);
+        #endif
+        }
         return stream;
     }
 
@@ -233,7 +359,13 @@ namespace termcolor
     std::ostream& on_cyan(std::ostream& stream)
     {
         if (__internal::is_atty(stream))
+        {
+        #if defined(OS_MACOS) || defined(OS_LINUX)
             stream << "\033[46m";
+        #elif defined(OS_WINDOWS)
+            __internal::win_change_attributes(stream, -1, BACKGROUND_GREEN | BACKGROUND_BLUE);
+        #endif
+        }
         return stream;
     }
 
@@ -241,7 +373,14 @@ namespace termcolor
     std::ostream& on_white(std::ostream& stream)
     {
         if (__internal::is_atty(stream))
+        {
+        #if defined(OS_MACOS) || defined(OS_LINUX)
             stream << "\033[47m";
+        #elif defined(OS_WINDOWS)
+            __internal::win_change_attributes(stream, -1, BACKGROUND_GREEN | BACKGROUND_BLUE | BACKGROUND_RED);
+        #endif
+        }
+
         return stream;
     }
 
@@ -280,6 +419,60 @@ namespace termcolor
             return ::_isatty(_fileno(std_stream));
         #endif
         }
+
+
+    #if defined(OS_WINDOWS)
+        //! Change Windows Terminal colors attribute. If some
+        //! parameter is `-1` then attribute willn't changed.
+        void win_change_attributes(std::ostream& stream, int foreground, int background)
+        {
+            // yeah, i know.. it's ugly, it's windows.
+            static WORD defaultAttributes = 0;
+
+            // get terminal handle
+            HANDLE hTerminal = INVALID_HANDLE_VALUE;
+            if (&stream == &std::cout)
+                hTerminal = GetStdHandle(STD_OUTPUT_HANDLE);
+            else if (&stream == &std::cerr)
+                hTerminal = GetStdHandle(STD_ERROR_HANDLE);
+
+            // save default terminal attributes if it unsaved
+            if (!defaultAttributes)
+            {
+                CONSOLE_SCREEN_BUFFER_INFO info;
+                if (!GetConsoleScreenBufferInfo(hTerminal, &info))
+                    return;
+                defaultAttributes = info.wAttributes;
+            }
+
+            // restore all default settings
+            if (foreground == -1 && background == -1)
+            {
+                SetConsoleTextAttribute(hTerminal, defaultAttributes);
+                return;
+            }
+
+            // get current settings
+            CONSOLE_SCREEN_BUFFER_INFO info;
+            if (!GetConsoleScreenBufferInfo(hTerminal, &info))
+                return;
+
+            if (foreground != -1)
+            {
+                info.wAttributes &= ~(info.wAttributes & 0x0F);
+                info.wAttributes |= static_cast<WORD>(foreground);
+            }
+
+            if (background != -1)
+            {
+                info.wAttributes &= ~(info.wAttributes & 0xF0);
+                info.wAttributes |= static_cast<WORD>(background);
+            }
+
+            SetConsoleTextAttribute(hTerminal, info.wAttributes);
+        }
+    #endif // OS_WINDOWS
+
     } // namespace __internal
 
 } // namespace termcolor

@@ -3,6 +3,10 @@
 Welcome to Termcolor C++ library
 ================================
 
+.. image:: _static/example.png
+   :alt: termcolor in action
+   :align: center
+
 Welcome to termcolor_'s documentation.  Termcolor is a header-only C++
 library for printing colored messages to the terminal. Written just for
 fun with a help of `the Force`_.

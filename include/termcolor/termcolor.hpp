@@ -19,7 +19,7 @@
 #   define OS_WINDOWS
 #elif defined(__APPLE__)
 #   define OS_MACOS
-#elif defined(linux) || defined(__linux) || defined(__CYGWIN__)
+#elif defined(linux) || defined(__linux) || defined(unix) || defined(__unix) || defined(__CYGWIN__)
 #   define OS_LINUX
 #else
 #   error unsupported platform

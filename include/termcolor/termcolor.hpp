@@ -39,13 +39,7 @@
 
 
 #include <iostream>
-#ifdef __STRICT_ANSI__  // Required when compiling with
-#undef __STRICT_ANSI__  // `-std=c++0x`, `-std=c++11`, or
-#include <cstdio>       // `-std=c++14` for POSIX function
-#define __STRICT_ANSI__ // `fileno()` to be provided.
-#else
 #include <cstdio>
-#endif
 
 
 
@@ -440,7 +434,7 @@ namespace termcolor
                 return stdout;
             else if ((&stream == &std::cerr) || (&stream == &std::clog))
                 return stderr;
-                
+
             return nullptr;
         }
 

@@ -19,7 +19,7 @@
 #   define OS_WINDOWS
 #elif defined(__APPLE__)
 #   define OS_MACOS
-#elif defined(linux) || defined(__linux)
+#elif defined(linux) || defined(__linux) || defined(__CYGWIN__)
 #   define OS_LINUX
 #else
 #   error unsupported platform
@@ -434,7 +434,7 @@ namespace termcolor
                 return stdout;
             else if ((&stream == &std::cerr) || (&stream == &std::clog))
                 return stderr;
-                
+
             return nullptr;
         }
 

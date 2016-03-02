@@ -9,7 +9,24 @@
 //! :license: BSD, see LICENSE for details
 //!
 
-#include <iostream>
+// Cygwin's C++ libraries seem to be stricter than other unix platforms.
+// Strict standard conformance must be disabled by passing -U__STRICT_ANSI__
+// (or equivalent option) to the compiler, or by #undef __STRICT_ANSI__
+// before including this header file, <cstdio>, or before any other header
+// that includes <cstdio> in the inclusion chain whithin the compilation
+// unit that includes "termcolor.hpp". Or by enabling compiler extensions,
+// such as issuing -std=gnu11++ GNU compiler option.
+//
+// This is required in order to `fileno()` is seen whithin "termcolor.hpp"
+// scope. Note that other unix-like platforms could enforce strict standard
+// conformance in the future and will require a similar workaround.
+#if defined(__CYGWIN__)
+#   undef __STRICT_ANSI__
+#   include <iostream>
+#   define __STRICT_ANSI__
+#else
+#   include <iostream>
+#endif
 #include "termcolor/termcolor.hpp"
 
 using namespace termcolor;

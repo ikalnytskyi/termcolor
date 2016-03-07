@@ -9,8 +9,16 @@
 //! :license: BSD, see LICENSE for details
 //!
 
+#pragma once
+
 #ifndef TERMCOLOR_HPP_
 #define TERMCOLOR_HPP_
+
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable: 4800) //about force cast int to bool
+#pragma warning(disable: 4005) //about changing macro in minwindef.h(130) (wtf?)
+#endif
 
 // the following snippet of code detects the current OS and
 // defines the appropriate macro that is used to wrap some
@@ -53,7 +61,7 @@ namespace termcolor
         inline bool is_atty(const std::ostream& stream);
 
     #if defined(OS_WINDOWS)
-        void win_change_attributes(std::ostream& stream, int foreground, int background=-1);
+        inline void win_change_attributes(std::ostream& stream, int foreground, int background=-1);
     #endif
     }
 
@@ -514,5 +522,9 @@ namespace termcolor
 #undef OS_WINDOWS
 #undef OS_MACOS
 #undef OS_LINUX
+
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif
 
 #endif // TERMCOLOR_HPP_

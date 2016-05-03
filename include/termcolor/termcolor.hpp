@@ -16,11 +16,11 @@
 // defines the appropriate macro that is used to wrap some
 // platform specific things
 #if defined(_WIN32) || defined(_WIN64)
-#   define OS_WINDOWS
+#   define TERMCOLOR_OS_WINDOWS
 #elif defined(__APPLE__)
-#   define OS_MACOS
+#   define TERMCOLOR_OS_MACOS
 #elif defined(__unix__) || defined(__unix)
-#   define OS_LINUX
+#   define TERMCOLOR_OS_LINUX
 #else
 #   error unsupported platform
 #endif
@@ -30,9 +30,9 @@
 // which are used for testing whether a standart stream refers
 // to the terminal. As for Windows, we also need WinApi funcs
 // for changing colors attributes of the terminal.
-#if defined(OS_MACOS) || defined(OS_LINUX)
+#if defined(TERMCOLOR_OS_MACOS) || defined(TERMCOLOR_OS_LINUX)
 #   include <unistd.h>
-#elif defined(OS_WINDOWS)
+#elif defined(TERMCOLOR_OS_WINDOWS)
 #   include <io.h>
 #   include <windows.h>
 #endif
@@ -52,7 +52,7 @@ namespace termcolor
         inline FILE* get_standard_stream(const std::ostream& stream);
         inline bool is_atty(const std::ostream& stream);
 
-    #if defined(OS_WINDOWS)
+    #if defined(TERMCOLOR_OS_WINDOWS)
         void win_change_attributes(std::ostream& stream, int foreground, int background=-1);
     #endif
     }
@@ -63,9 +63,9 @@ namespace termcolor
     {
         if (__internal::is_atty(stream))
         {
-        #if defined(OS_MACOS) || defined(OS_LINUX)
+        #if defined(TERMCOLOR_OS_MACOS) || defined(TERMCOLOR_OS_LINUX)
             stream << "\033[00m";
-        #elif defined(OS_WINDOWS)
+        #elif defined(TERMCOLOR_OS_WINDOWS)
             __internal::win_change_attributes(stream, -1, -1);
         #endif
         }
@@ -78,9 +78,9 @@ namespace termcolor
     {
         if (__internal::is_atty(stream))
         {
-        #if defined(OS_MACOS) || defined(OS_LINUX)
+        #if defined(TERMCOLOR_OS_MACOS) || defined(TERMCOLOR_OS_LINUX)
             stream << "\033[1m";
-        #elif defined(OS_WINDOWS)
+        #elif defined(TERMCOLOR_OS_WINDOWS)
         #endif
         }
         return stream;
@@ -92,9 +92,9 @@ namespace termcolor
     {
         if (__internal::is_atty(stream))
         {
-        #if defined(OS_MACOS) || defined(OS_LINUX)
+        #if defined(TERMCOLOR_OS_MACOS) || defined(TERMCOLOR_OS_LINUX)
             stream << "\033[2m";
-        #elif defined(OS_WINDOWS)
+        #elif defined(TERMCOLOR_OS_WINDOWS)
         #endif
         }
         return stream;
@@ -106,9 +106,9 @@ namespace termcolor
     {
         if (__internal::is_atty(stream))
         {
-        #if defined(OS_MACOS) || defined(OS_LINUX)
+        #if defined(TERMCOLOR_OS_MACOS) || defined(TERMCOLOR_OS_LINUX)
             stream << "\033[4m";
-        #elif defined(OS_WINDOWS)
+        #elif defined(TERMCOLOR_OS_WINDOWS)
         #endif
         }
         return stream;
@@ -120,9 +120,9 @@ namespace termcolor
     {
         if (__internal::is_atty(stream))
         {
-        #if defined(OS_MACOS) || defined(OS_LINUX)
+        #if defined(TERMCOLOR_OS_MACOS) || defined(TERMCOLOR_OS_LINUX)
             stream << "\033[5m";
-        #elif defined(OS_WINDOWS)
+        #elif defined(TERMCOLOR_OS_WINDOWS)
         #endif
         }
         return stream;
@@ -134,9 +134,9 @@ namespace termcolor
     {
         if (__internal::is_atty(stream))
         {
-        #if defined(OS_MACOS) || defined(OS_LINUX)
+        #if defined(TERMCOLOR_OS_MACOS) || defined(TERMCOLOR_OS_LINUX)
             stream << "\033[7m";
-        #elif defined(OS_WINDOWS)
+        #elif defined(TERMCOLOR_OS_WINDOWS)
         #endif
         }
         return stream;
@@ -148,9 +148,9 @@ namespace termcolor
     {
         if (__internal::is_atty(stream))
         {
-        #if defined(OS_MACOS) || defined(OS_LINUX)
+        #if defined(TERMCOLOR_OS_MACOS) || defined(TERMCOLOR_OS_LINUX)
             stream << "\033[8m";
-        #elif defined(OS_WINDOWS)
+        #elif defined(TERMCOLOR_OS_WINDOWS)
         #endif
         }
         return stream;
@@ -162,9 +162,9 @@ namespace termcolor
     {
         if (__internal::is_atty(stream))
         {
-        #if defined(OS_MACOS) || defined(OS_LINUX)
+        #if defined(TERMCOLOR_OS_MACOS) || defined(TERMCOLOR_OS_LINUX)
             stream << "\033[30m";
-        #elif defined(OS_WINDOWS)
+        #elif defined(TERMCOLOR_OS_WINDOWS)
             __internal::win_change_attributes(stream,
                 0   // grey (black)
             );
@@ -178,9 +178,9 @@ namespace termcolor
     {
         if (__internal::is_atty(stream))
         {
-        #if defined(OS_MACOS) || defined(OS_LINUX)
+        #if defined(TERMCOLOR_OS_MACOS) || defined(TERMCOLOR_OS_LINUX)
             stream << "\033[31m";
-        #elif defined(OS_WINDOWS)
+        #elif defined(TERMCOLOR_OS_WINDOWS)
             __internal::win_change_attributes(stream,
                 FOREGROUND_RED
             );
@@ -194,9 +194,9 @@ namespace termcolor
     {
         if (__internal::is_atty(stream))
         {
-        #if defined(OS_MACOS) || defined(OS_LINUX)
+        #if defined(TERMCOLOR_OS_MACOS) || defined(TERMCOLOR_OS_LINUX)
             stream << "\033[32m";
-        #elif defined(OS_WINDOWS)
+        #elif defined(TERMCOLOR_OS_WINDOWS)
             __internal::win_change_attributes(stream,
                 FOREGROUND_GREEN
             );
@@ -210,9 +210,9 @@ namespace termcolor
     {
         if (__internal::is_atty(stream))
         {
-        #if defined(OS_MACOS) || defined(OS_LINUX)
+        #if defined(TERMCOLOR_OS_MACOS) || defined(TERMCOLOR_OS_LINUX)
             stream << "\033[33m";
-        #elif defined(OS_WINDOWS)
+        #elif defined(TERMCOLOR_OS_WINDOWS)
             __internal::win_change_attributes(stream,
                 FOREGROUND_GREEN | FOREGROUND_RED
             );
@@ -226,9 +226,9 @@ namespace termcolor
     {
         if (__internal::is_atty(stream))
         {
-        #if defined(OS_MACOS) || defined(OS_LINUX)
+        #if defined(TERMCOLOR_OS_MACOS) || defined(TERMCOLOR_OS_LINUX)
             stream << "\033[34m";
-        #elif defined(OS_WINDOWS)
+        #elif defined(TERMCOLOR_OS_WINDOWS)
             __internal::win_change_attributes(stream,
                 FOREGROUND_BLUE
             );
@@ -242,9 +242,9 @@ namespace termcolor
     {
         if (__internal::is_atty(stream))
         {
-        #if defined(OS_MACOS) || defined(OS_LINUX)
+        #if defined(TERMCOLOR_OS_MACOS) || defined(TERMCOLOR_OS_LINUX)
             stream << "\033[35m";
-        #elif defined(OS_WINDOWS)
+        #elif defined(TERMCOLOR_OS_WINDOWS)
             __internal::win_change_attributes(stream,
                 FOREGROUND_BLUE | FOREGROUND_RED
             );
@@ -258,9 +258,9 @@ namespace termcolor
     {
         if (__internal::is_atty(stream))
         {
-        #if defined(OS_MACOS) || defined(OS_LINUX)
+        #if defined(TERMCOLOR_OS_MACOS) || defined(TERMCOLOR_OS_LINUX)
             stream << "\033[36m";
-        #elif defined(OS_WINDOWS)
+        #elif defined(TERMCOLOR_OS_WINDOWS)
             __internal::win_change_attributes(stream,
                 FOREGROUND_BLUE | FOREGROUND_GREEN
             );
@@ -274,9 +274,9 @@ namespace termcolor
     {
         if (__internal::is_atty(stream))
         {
-        #if defined(OS_MACOS) || defined(OS_LINUX)
+        #if defined(TERMCOLOR_OS_MACOS) || defined(TERMCOLOR_OS_LINUX)
             stream << "\033[37m";
-        #elif defined(OS_WINDOWS)
+        #elif defined(TERMCOLOR_OS_WINDOWS)
             __internal::win_change_attributes(stream,
                 FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED
             );
@@ -292,9 +292,9 @@ namespace termcolor
     {
         if (__internal::is_atty(stream))
         {
-        #if defined(OS_MACOS) || defined(OS_LINUX)
+        #if defined(TERMCOLOR_OS_MACOS) || defined(TERMCOLOR_OS_LINUX)
             stream << "\033[40m";
-        #elif defined(OS_WINDOWS)
+        #elif defined(TERMCOLOR_OS_WINDOWS)
             __internal::win_change_attributes(stream, -1,
                 0   // grey (black)
             );
@@ -308,9 +308,9 @@ namespace termcolor
     {
         if (__internal::is_atty(stream))
         {
-        #if defined(OS_MACOS) || defined(OS_LINUX)
+        #if defined(TERMCOLOR_OS_MACOS) || defined(TERMCOLOR_OS_LINUX)
             stream << "\033[41m";
-        #elif defined(OS_WINDOWS)
+        #elif defined(TERMCOLOR_OS_WINDOWS)
             __internal::win_change_attributes(stream, -1,
                 BACKGROUND_RED
             );
@@ -324,9 +324,9 @@ namespace termcolor
     {
         if (__internal::is_atty(stream))
         {
-        #if defined(OS_MACOS) || defined(OS_LINUX)
+        #if defined(TERMCOLOR_OS_MACOS) || defined(TERMCOLOR_OS_LINUX)
             stream << "\033[42m";
-        #elif defined(OS_WINDOWS)
+        #elif defined(TERMCOLOR_OS_WINDOWS)
             __internal::win_change_attributes(stream, -1,
                 BACKGROUND_GREEN
             );
@@ -340,9 +340,9 @@ namespace termcolor
     {
         if (__internal::is_atty(stream))
         {
-        #if defined(OS_MACOS) || defined(OS_LINUX)
+        #if defined(TERMCOLOR_OS_MACOS) || defined(TERMCOLOR_OS_LINUX)
             stream << "\033[43m";
-        #elif defined(OS_WINDOWS)
+        #elif defined(TERMCOLOR_OS_WINDOWS)
             __internal::win_change_attributes(stream, -1,
                 BACKGROUND_GREEN | BACKGROUND_RED
             );
@@ -356,9 +356,9 @@ namespace termcolor
     {
         if (__internal::is_atty(stream))
         {
-        #if defined(OS_MACOS) || defined(OS_LINUX)
+        #if defined(TERMCOLOR_OS_MACOS) || defined(TERMCOLOR_OS_LINUX)
             stream << "\033[44m";
-        #elif defined(OS_WINDOWS)
+        #elif defined(TERMCOLOR_OS_WINDOWS)
             __internal::win_change_attributes(stream, -1,
                 BACKGROUND_BLUE
             );
@@ -372,9 +372,9 @@ namespace termcolor
     {
         if (__internal::is_atty(stream))
         {
-        #if defined(OS_MACOS) || defined(OS_LINUX)
+        #if defined(TERMCOLOR_OS_MACOS) || defined(TERMCOLOR_OS_LINUX)
             stream << "\033[45m";
-        #elif defined(OS_WINDOWS)
+        #elif defined(TERMCOLOR_OS_WINDOWS)
             __internal::win_change_attributes(stream, -1,
                 BACKGROUND_BLUE | BACKGROUND_RED
             );
@@ -388,9 +388,9 @@ namespace termcolor
     {
         if (__internal::is_atty(stream))
         {
-        #if defined(OS_MACOS) || defined(OS_LINUX)
+        #if defined(TERMCOLOR_OS_MACOS) || defined(TERMCOLOR_OS_LINUX)
             stream << "\033[46m";
-        #elif defined(OS_WINDOWS)
+        #elif defined(TERMCOLOR_OS_WINDOWS)
             __internal::win_change_attributes(stream, -1,
                 BACKGROUND_GREEN | BACKGROUND_BLUE
             );
@@ -404,9 +404,9 @@ namespace termcolor
     {
         if (__internal::is_atty(stream))
         {
-        #if defined(OS_MACOS) || defined(OS_LINUX)
+        #if defined(TERMCOLOR_OS_MACOS) || defined(TERMCOLOR_OS_LINUX)
             stream << "\033[47m";
-        #elif defined(OS_WINDOWS)
+        #elif defined(TERMCOLOR_OS_WINDOWS)
             __internal::win_change_attributes(stream, -1,
                 BACKGROUND_GREEN | BACKGROUND_BLUE | BACKGROUND_RED
             );
@@ -446,15 +446,15 @@ namespace termcolor
         {
             FILE* std_stream = get_standard_stream(stream);
 
-        #if defined(OS_MACOS) || defined(OS_LINUX)
+        #if defined(TERMCOLOR_OS_MACOS) || defined(TERMCOLOR_OS_LINUX)
             return ::isatty(fileno(std_stream));
-        #elif defined(OS_WINDOWS)
+        #elif defined(TERMCOLOR_OS_WINDOWS)
             return ::_isatty(_fileno(std_stream));
         #endif
         }
 
 
-    #if defined(OS_WINDOWS)
+    #if defined(TERMCOLOR_OS_WINDOWS)
         //! Change Windows Terminal colors attribute. If some
         //! parameter is `-1` then attribute won't changed.
         void win_change_attributes(std::ostream& stream, int foreground, int background)
@@ -504,15 +504,15 @@ namespace termcolor
 
             SetConsoleTextAttribute(hTerminal, info.wAttributes);
         }
-    #endif // OS_WINDOWS
+    #endif // TERMCOLOR_OS_WINDOWS
 
     } // namespace __internal
 
 } // namespace termcolor
 
 
-#undef OS_WINDOWS
-#undef OS_MACOS
-#undef OS_LINUX
+#undef TERMCOLOR_OS_WINDOWS
+#undef TERMCOLOR_OS_MACOS
+#undef TERMCOLOR_OS_LINUX
 
 #endif // TERMCOLOR_HPP_

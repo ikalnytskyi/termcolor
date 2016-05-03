@@ -45,9 +45,9 @@
 
 namespace termcolor
 {
-    // Forward declaration of the `__internal` namespace.
+    // Forward declaration of the `_internal` namespace.
     // All comments are below.
-    namespace __internal
+    namespace _internal
     {
         inline FILE* get_standard_stream(const std::ostream& stream);
         inline bool is_atty(const std::ostream& stream);
@@ -61,12 +61,12 @@ namespace termcolor
     inline
     std::ostream& reset(std::ostream& stream)
     {
-        if (__internal::is_atty(stream))
+        if (_internal::is_atty(stream))
         {
         #if defined(TERMCOLOR_OS_MACOS) || defined(TERMCOLOR_OS_LINUX)
             stream << "\033[00m";
         #elif defined(TERMCOLOR_OS_WINDOWS)
-            __internal::win_change_attributes(stream, -1, -1);
+            _internal::win_change_attributes(stream, -1, -1);
         #endif
         }
         return stream;
@@ -76,7 +76,7 @@ namespace termcolor
     inline
     std::ostream& bold(std::ostream& stream)
     {
-        if (__internal::is_atty(stream))
+        if (_internal::is_atty(stream))
         {
         #if defined(TERMCOLOR_OS_MACOS) || defined(TERMCOLOR_OS_LINUX)
             stream << "\033[1m";
@@ -90,7 +90,7 @@ namespace termcolor
     inline
     std::ostream& dark(std::ostream& stream)
     {
-        if (__internal::is_atty(stream))
+        if (_internal::is_atty(stream))
         {
         #if defined(TERMCOLOR_OS_MACOS) || defined(TERMCOLOR_OS_LINUX)
             stream << "\033[2m";
@@ -104,7 +104,7 @@ namespace termcolor
     inline
     std::ostream& underline(std::ostream& stream)
     {
-        if (__internal::is_atty(stream))
+        if (_internal::is_atty(stream))
         {
         #if defined(TERMCOLOR_OS_MACOS) || defined(TERMCOLOR_OS_LINUX)
             stream << "\033[4m";
@@ -118,7 +118,7 @@ namespace termcolor
     inline
     std::ostream& blink(std::ostream& stream)
     {
-        if (__internal::is_atty(stream))
+        if (_internal::is_atty(stream))
         {
         #if defined(TERMCOLOR_OS_MACOS) || defined(TERMCOLOR_OS_LINUX)
             stream << "\033[5m";
@@ -132,7 +132,7 @@ namespace termcolor
     inline
     std::ostream& reverse(std::ostream& stream)
     {
-        if (__internal::is_atty(stream))
+        if (_internal::is_atty(stream))
         {
         #if defined(TERMCOLOR_OS_MACOS) || defined(TERMCOLOR_OS_LINUX)
             stream << "\033[7m";
@@ -146,7 +146,7 @@ namespace termcolor
     inline
     std::ostream& concealed(std::ostream& stream)
     {
-        if (__internal::is_atty(stream))
+        if (_internal::is_atty(stream))
         {
         #if defined(TERMCOLOR_OS_MACOS) || defined(TERMCOLOR_OS_LINUX)
             stream << "\033[8m";
@@ -160,12 +160,12 @@ namespace termcolor
     inline
     std::ostream& grey(std::ostream& stream)
     {
-        if (__internal::is_atty(stream))
+        if (_internal::is_atty(stream))
         {
         #if defined(TERMCOLOR_OS_MACOS) || defined(TERMCOLOR_OS_LINUX)
             stream << "\033[30m";
         #elif defined(TERMCOLOR_OS_WINDOWS)
-            __internal::win_change_attributes(stream,
+            _internal::win_change_attributes(stream,
                 0   // grey (black)
             );
         #endif
@@ -176,12 +176,12 @@ namespace termcolor
     inline
     std::ostream& red(std::ostream& stream)
     {
-        if (__internal::is_atty(stream))
+        if (_internal::is_atty(stream))
         {
         #if defined(TERMCOLOR_OS_MACOS) || defined(TERMCOLOR_OS_LINUX)
             stream << "\033[31m";
         #elif defined(TERMCOLOR_OS_WINDOWS)
-            __internal::win_change_attributes(stream,
+            _internal::win_change_attributes(stream,
                 FOREGROUND_RED
             );
         #endif
@@ -192,12 +192,12 @@ namespace termcolor
     inline
     std::ostream& green(std::ostream& stream)
     {
-        if (__internal::is_atty(stream))
+        if (_internal::is_atty(stream))
         {
         #if defined(TERMCOLOR_OS_MACOS) || defined(TERMCOLOR_OS_LINUX)
             stream << "\033[32m";
         #elif defined(TERMCOLOR_OS_WINDOWS)
-            __internal::win_change_attributes(stream,
+            _internal::win_change_attributes(stream,
                 FOREGROUND_GREEN
             );
         #endif
@@ -208,12 +208,12 @@ namespace termcolor
     inline
     std::ostream& yellow(std::ostream& stream)
     {
-        if (__internal::is_atty(stream))
+        if (_internal::is_atty(stream))
         {
         #if defined(TERMCOLOR_OS_MACOS) || defined(TERMCOLOR_OS_LINUX)
             stream << "\033[33m";
         #elif defined(TERMCOLOR_OS_WINDOWS)
-            __internal::win_change_attributes(stream,
+            _internal::win_change_attributes(stream,
                 FOREGROUND_GREEN | FOREGROUND_RED
             );
         #endif
@@ -224,12 +224,12 @@ namespace termcolor
     inline
     std::ostream& blue(std::ostream& stream)
     {
-        if (__internal::is_atty(stream))
+        if (_internal::is_atty(stream))
         {
         #if defined(TERMCOLOR_OS_MACOS) || defined(TERMCOLOR_OS_LINUX)
             stream << "\033[34m";
         #elif defined(TERMCOLOR_OS_WINDOWS)
-            __internal::win_change_attributes(stream,
+            _internal::win_change_attributes(stream,
                 FOREGROUND_BLUE
             );
         #endif
@@ -240,12 +240,12 @@ namespace termcolor
     inline
     std::ostream& magenta(std::ostream& stream)
     {
-        if (__internal::is_atty(stream))
+        if (_internal::is_atty(stream))
         {
         #if defined(TERMCOLOR_OS_MACOS) || defined(TERMCOLOR_OS_LINUX)
             stream << "\033[35m";
         #elif defined(TERMCOLOR_OS_WINDOWS)
-            __internal::win_change_attributes(stream,
+            _internal::win_change_attributes(stream,
                 FOREGROUND_BLUE | FOREGROUND_RED
             );
         #endif
@@ -256,12 +256,12 @@ namespace termcolor
     inline
     std::ostream& cyan(std::ostream& stream)
     {
-        if (__internal::is_atty(stream))
+        if (_internal::is_atty(stream))
         {
         #if defined(TERMCOLOR_OS_MACOS) || defined(TERMCOLOR_OS_LINUX)
             stream << "\033[36m";
         #elif defined(TERMCOLOR_OS_WINDOWS)
-            __internal::win_change_attributes(stream,
+            _internal::win_change_attributes(stream,
                 FOREGROUND_BLUE | FOREGROUND_GREEN
             );
         #endif
@@ -272,12 +272,12 @@ namespace termcolor
     inline
     std::ostream& white(std::ostream& stream)
     {
-        if (__internal::is_atty(stream))
+        if (_internal::is_atty(stream))
         {
         #if defined(TERMCOLOR_OS_MACOS) || defined(TERMCOLOR_OS_LINUX)
             stream << "\033[37m";
         #elif defined(TERMCOLOR_OS_WINDOWS)
-            __internal::win_change_attributes(stream,
+            _internal::win_change_attributes(stream,
                 FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED
             );
         #endif
@@ -290,12 +290,12 @@ namespace termcolor
     inline
     std::ostream& on_grey(std::ostream& stream)
     {
-        if (__internal::is_atty(stream))
+        if (_internal::is_atty(stream))
         {
         #if defined(TERMCOLOR_OS_MACOS) || defined(TERMCOLOR_OS_LINUX)
             stream << "\033[40m";
         #elif defined(TERMCOLOR_OS_WINDOWS)
-            __internal::win_change_attributes(stream, -1,
+            _internal::win_change_attributes(stream, -1,
                 0   // grey (black)
             );
         #endif
@@ -306,12 +306,12 @@ namespace termcolor
     inline
     std::ostream& on_red(std::ostream& stream)
     {
-        if (__internal::is_atty(stream))
+        if (_internal::is_atty(stream))
         {
         #if defined(TERMCOLOR_OS_MACOS) || defined(TERMCOLOR_OS_LINUX)
             stream << "\033[41m";
         #elif defined(TERMCOLOR_OS_WINDOWS)
-            __internal::win_change_attributes(stream, -1,
+            _internal::win_change_attributes(stream, -1,
                 BACKGROUND_RED
             );
         #endif
@@ -322,12 +322,12 @@ namespace termcolor
     inline
     std::ostream& on_green(std::ostream& stream)
     {
-        if (__internal::is_atty(stream))
+        if (_internal::is_atty(stream))
         {
         #if defined(TERMCOLOR_OS_MACOS) || defined(TERMCOLOR_OS_LINUX)
             stream << "\033[42m";
         #elif defined(TERMCOLOR_OS_WINDOWS)
-            __internal::win_change_attributes(stream, -1,
+            _internal::win_change_attributes(stream, -1,
                 BACKGROUND_GREEN
             );
         #endif
@@ -338,12 +338,12 @@ namespace termcolor
     inline
     std::ostream& on_yellow(std::ostream& stream)
     {
-        if (__internal::is_atty(stream))
+        if (_internal::is_atty(stream))
         {
         #if defined(TERMCOLOR_OS_MACOS) || defined(TERMCOLOR_OS_LINUX)
             stream << "\033[43m";
         #elif defined(TERMCOLOR_OS_WINDOWS)
-            __internal::win_change_attributes(stream, -1,
+            _internal::win_change_attributes(stream, -1,
                 BACKGROUND_GREEN | BACKGROUND_RED
             );
         #endif
@@ -354,12 +354,12 @@ namespace termcolor
     inline
     std::ostream& on_blue(std::ostream& stream)
     {
-        if (__internal::is_atty(stream))
+        if (_internal::is_atty(stream))
         {
         #if defined(TERMCOLOR_OS_MACOS) || defined(TERMCOLOR_OS_LINUX)
             stream << "\033[44m";
         #elif defined(TERMCOLOR_OS_WINDOWS)
-            __internal::win_change_attributes(stream, -1,
+            _internal::win_change_attributes(stream, -1,
                 BACKGROUND_BLUE
             );
         #endif
@@ -370,12 +370,12 @@ namespace termcolor
     inline
     std::ostream& on_magenta(std::ostream& stream)
     {
-        if (__internal::is_atty(stream))
+        if (_internal::is_atty(stream))
         {
         #if defined(TERMCOLOR_OS_MACOS) || defined(TERMCOLOR_OS_LINUX)
             stream << "\033[45m";
         #elif defined(TERMCOLOR_OS_WINDOWS)
-            __internal::win_change_attributes(stream, -1,
+            _internal::win_change_attributes(stream, -1,
                 BACKGROUND_BLUE | BACKGROUND_RED
             );
         #endif
@@ -386,12 +386,12 @@ namespace termcolor
     inline
     std::ostream& on_cyan(std::ostream& stream)
     {
-        if (__internal::is_atty(stream))
+        if (_internal::is_atty(stream))
         {
         #if defined(TERMCOLOR_OS_MACOS) || defined(TERMCOLOR_OS_LINUX)
             stream << "\033[46m";
         #elif defined(TERMCOLOR_OS_WINDOWS)
-            __internal::win_change_attributes(stream, -1,
+            _internal::win_change_attributes(stream, -1,
                 BACKGROUND_GREEN | BACKGROUND_BLUE
             );
         #endif
@@ -402,12 +402,12 @@ namespace termcolor
     inline
     std::ostream& on_white(std::ostream& stream)
     {
-        if (__internal::is_atty(stream))
+        if (_internal::is_atty(stream))
         {
         #if defined(TERMCOLOR_OS_MACOS) || defined(TERMCOLOR_OS_LINUX)
             stream << "\033[47m";
         #elif defined(TERMCOLOR_OS_WINDOWS)
-            __internal::win_change_attributes(stream, -1,
+            _internal::win_change_attributes(stream, -1,
                 BACKGROUND_GREEN | BACKGROUND_BLUE | BACKGROUND_RED
             );
         #endif
@@ -422,7 +422,7 @@ namespace termcolor
     //! the outer access, I have to introduce this namespace which
     //! is used for internal purpose and should't be access from
     //! the user code.
-    namespace __internal
+    namespace _internal
     {
         //! Since C++ hasn't a true way to extract stream handler
         //! from the a given `std::ostream` object, I have to write
@@ -506,7 +506,7 @@ namespace termcolor
         }
     #endif // TERMCOLOR_OS_WINDOWS
 
-    } // namespace __internal
+    } // namespace _internal
 
 } // namespace termcolor
 

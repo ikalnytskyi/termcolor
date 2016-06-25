@@ -15,6 +15,9 @@ Termcolor uses `ANSI color formatting`_, so you can use it on every system
 that is used such terminals (Linux, Unix, Mac OS).  On Windows, the WinAPI
 used instead, but some restrictions are applied.
 
+It's licensed under the BSD (3-clause) License. That basically means:
+do whatever you want as long as copyright sticks around.
+
 .. _termcolor: https://github.com/ikalnitsky/termcolor
 .. _the Force: http://starwars.wikia.com/wiki/The_Force
 .. _ANSI color formatting: http://en.wikipedia.org/wiki/ANSI_escape_code#Colors

@@ -435,7 +435,7 @@ namespace termcolor
             else if ((&stream == &std::cerr) || (&stream == &std::clog))
                 return stderr;
 
-            return nullptr;
+            return 0;
         }
 
 

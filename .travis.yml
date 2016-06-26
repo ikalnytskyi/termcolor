@@ -1,0 +1,18 @@
+sudo: false
+language: cpp
+
+os:
+  - linux
+  - osx
+
+compiler:
+  - clang
+  - gcc
+
+script:
+  - mkdir build/ && cd build/
+  - cmake ../ -DCMAKE_BUILD_TYPE=Release
+  - make
+
+notifications:
+  email: false

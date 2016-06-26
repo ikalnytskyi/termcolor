@@ -10,7 +10,7 @@ if (${CMAKE_CXX_COMPILER_ID} STREQUAL "Clang")
 endif (${CMAKE_CXX_COMPILER_ID} STREQUAL "Clang")
 
 if (CMAKE_COMPILER_IS_GNUCXX OR CMAKE_COMPILER_IS_CLANG)
-  set (CMAKE_CXX_FLAGS "-Wall -Wextra -pedantic -fvisibility=hidden -std=c++11")
+  set (CMAKE_CXX_FLAGS "-Wall -Wextra -pedantic -fvisibility=hidden")
   set (CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_INIT} -g")
   set (CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_INIT} -O2")
 endif (CMAKE_COMPILER_IS_GNUCXX OR CMAKE_COMPILER_IS_CLANG)

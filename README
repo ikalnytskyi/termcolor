@@ -33,6 +33,8 @@
 
       Termcolor supports ANSI color formatting. This formatting is
       supported by most popular terminals on Linux, Unix and Mac OS.
+      On Windows, WinAPI is used instead, however, some limitations
+      are applied. Check the docs for details!
 
 
     ~ Where the docs?

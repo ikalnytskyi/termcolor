@@ -7,13 +7,14 @@ Welcome to Termcolor C++ library
    :alt: termcolor in action
    :align: center
 
-Welcome to termcolor_'s documentation.  Termcolor is a header-only C++
-library for printing colored messages to the terminal. Written just for
-fun with a help of `the Force`_.
+Welcome to termcolor_'s documentation. Termcolor is a header-only C++
+library for printing colored messages to the terminal. Written just
+for fun with a help of `the Force`_.
 
-Termcolor uses `ANSI color formatting`_, so you can use it on every system
-that is used such terminals (Linux, Unix, Mac OS).  On Windows, the WinAPI
-used instead, but some restrictions are applied.
+Termcolor uses `ANSI color formatting`_, so you can use it on every
+system that is used such terminals (most \*nix systems, including Linux
+and Mac OS). On Windows, WinAPI is used instead, but some limitations
+are applied.
 
 It's licensed under the BSD (3-clause) License. That basically means:
 do whatever you want as long as copyright sticks around.
@@ -101,7 +102,7 @@ Background manipulators
 Attribute manipulators
 ......................
 
-For now, this manipulators don't work on Windows.
+(so far they don't supported by Windows)
 
 #. ``termcolor::bold``
 #. ``termcolor::dark``

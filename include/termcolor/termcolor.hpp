@@ -53,7 +53,7 @@ namespace termcolor
         inline bool is_atty(const std::ostream& stream);
 
     #if defined(TERMCOLOR_OS_WINDOWS)
-        void win_change_attributes(std::ostream& stream, int foreground, int background=-1);
+        inline void win_change_attributes(std::ostream& stream, int foreground, int background=-1);
     #endif
     }
 
@@ -457,7 +457,7 @@ namespace termcolor
     #if defined(TERMCOLOR_OS_WINDOWS)
         //! Change Windows Terminal colors attribute. If some
         //! parameter is `-1` then attribute won't changed.
-        void win_change_attributes(std::ostream& stream, int foreground, int background)
+        inline void win_change_attributes(std::ostream& stream, int foreground, int background)
         {
             // yeah, i know.. it's ugly, it's windows.
             static WORD defaultAttributes = 0;

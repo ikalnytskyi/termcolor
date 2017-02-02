@@ -27,8 +27,11 @@ do whatever you want as long as copyright sticks around.
 Installation
 ------------
 
-Add ``termcolor.hpp`` to the project and use provided stream manimulators
-from the ``termcolor`` namespace.
+Click on the green button Clone or download and then on ZIP.
+Extract and find the .hpp file that is located in include.
+Add the ``termcolor.hpp`` file directly to the root of your folder/project where your main.cpp file is located.
+Warning! I recommend that you do not add the file via your IDE.
+For example, with Code :: Blocks, this will create a header folder.
 
 
 How to use?
@@ -38,7 +41,7 @@ It's very easy to use. The idea is based on the use of C++ stream
 manipulators. The typical «Hello World» application is below::
 
     #include <iostream>
-    #include <termcolor/termcolor.hpp>
+    #include "termcolor.hpp"
 
 
     int main(int /*argc*/, char** /*argv*/)

@@ -1,3 +1,8 @@
 *.o
 build/
 docs/_build
+/buck-out/
+/.buckd/
+/buckaroo/
+.buckconfig.local
+BUCKAROO_DEPS

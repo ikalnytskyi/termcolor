@@ -23,9 +23,11 @@
 #if defined(__CYGWIN__)
 #   undef __STRICT_ANSI__
 #   include <iostream>
+#   include <sstream>
 #   define __STRICT_ANSI__
 #else
 #   include <iostream>
+#   include <sstream>
 #endif
 #include "termcolor/termcolor.hpp"
 
@@ -71,6 +73,10 @@ int main(int /*argc*/, char** /*argv*/)
     std::cout << reverse   << "reversed message"   << reset << std::endl;
     std::cout << concealed << "concealed message"  << reset << std::endl;
     std::cout              << "default message"    << std::endl;
+
+    // test there's no crash with stringstream
+    std::stringstream ss;
+    ss << grey << "ok";
 
     return 0;
 }

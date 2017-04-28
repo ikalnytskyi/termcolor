@@ -7,3 +7,4 @@ endif()
 
 include_directories(${termcolor_SOURCE_DIR}/include)
 add_executable(test_${CMAKE_PROJECT_NAME} test/test.cpp)
+add_custom_target(run COMMAND test_${CMAKE_PROJECT_NAME})

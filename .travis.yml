@@ -12,6 +12,7 @@ compiler:
 script:
   - cmake .
   - make
+  - make run
 
 notifications:
   email: false

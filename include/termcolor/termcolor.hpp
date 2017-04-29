@@ -446,6 +446,13 @@ namespace termcolor
         {
             FILE* std_stream = get_standard_stream(stream);
 
+            // Unfortunately, fileno() ends with segmentation fault
+            // if invalid file descriptor is passed. So we need to
+            // handle this case gracefully and assume it's not a tty
+            // if standard stream is not detected, and 0 is returned.
+            if (!std_stream)
+                return false;
+
         #if defined(TERMCOLOR_OS_MACOS) || defined(TERMCOLOR_OS_LINUX)
             return ::isatty(fileno(std_stream));
         #elif defined(TERMCOLOR_OS_WINDOWS)

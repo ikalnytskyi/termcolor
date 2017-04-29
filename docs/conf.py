@@ -7,7 +7,7 @@ from __future__ import unicode_literals
 
 # project information
 project = 'termcolor'
-copyright = '2013, Igor Kalnitsky'
+copyright = '2013, Ihor Kalnytskyi'
 version = '0.1'
 release = '0.1'
 

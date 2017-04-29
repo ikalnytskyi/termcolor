@@ -5,7 +5,7 @@
 //! A simple file which used all the termcolor featured.
 //! It isn't a usual automated test, it's an unsual visual test! :D
 //!
-//! :copyright: (c) 2013 by Igor Kalnitsky
+//! :copyright: (c) 2013 by Ihor Kalnytskyi
 //! :license: BSD, see LICENSE for details
 //!
 

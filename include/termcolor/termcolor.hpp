@@ -49,7 +49,12 @@ namespace termcolor
     // All comments are below.
     namespace _internal
     {
+        // An index to be used to access a private storage of I/O streams. See
+        // colorize / nocolorize I/O manipulators for details.
+        static int colorize_index = std::ios_base::xalloc();
+
         inline FILE* get_standard_stream(const std::ostream& stream);
+        inline bool is_colorized(std::ostream& stream);
         inline bool is_atty(const std::ostream& stream);
 
     #if defined(TERMCOLOR_OS_WINDOWS)
@@ -57,11 +62,24 @@ namespace termcolor
     #endif
     }
 
+    inline
+    std::ostream& colorize(std::ostream& stream)
+    {
+        stream.iword(_internal::colorize_index) = 1L;
+        return stream;
+    }
+
+    inline
+    std::ostream& nocolorize(std::ostream& stream)
+    {
+        stream.iword(_internal::colorize_index) = 0L;
+        return stream;
+    }
 
     inline
     std::ostream& reset(std::ostream& stream)
     {
-        if (_internal::is_atty(stream))
+        if (_internal::is_colorized(stream))
         {
         #if defined(TERMCOLOR_OS_MACOS) || defined(TERMCOLOR_OS_LINUX)
             stream << "\033[00m";
@@ -76,7 +94,7 @@ namespace termcolor
     inline
     std::ostream& bold(std::ostream& stream)
     {
-        if (_internal::is_atty(stream))
+        if (_internal::is_colorized(stream))
         {
         #if defined(TERMCOLOR_OS_MACOS) || defined(TERMCOLOR_OS_LINUX)
             stream << "\033[1m";
@@ -90,7 +108,7 @@ namespace termcolor
     inline
     std::ostream& dark(std::ostream& stream)
     {
-        if (_internal::is_atty(stream))
+        if (_internal::is_colorized(stream))
         {
         #if defined(TERMCOLOR_OS_MACOS) || defined(TERMCOLOR_OS_LINUX)
             stream << "\033[2m";
@@ -104,7 +122,7 @@ namespace termcolor
     inline
     std::ostream& underline(std::ostream& stream)
     {
-        if (_internal::is_atty(stream))
+        if (_internal::is_colorized(stream))
         {
         #if defined(TERMCOLOR_OS_MACOS) || defined(TERMCOLOR_OS_LINUX)
             stream << "\033[4m";
@@ -118,7 +136,7 @@ namespace termcolor
     inline
     std::ostream& blink(std::ostream& stream)
     {
-        if (_internal::is_atty(stream))
+        if (_internal::is_colorized(stream))
         {
         #if defined(TERMCOLOR_OS_MACOS) || defined(TERMCOLOR_OS_LINUX)
             stream << "\033[5m";
@@ -132,7 +150,7 @@ namespace termcolor
     inline
     std::ostream& reverse(std::ostream& stream)
     {
-        if (_internal::is_atty(stream))
+        if (_internal::is_colorized(stream))
         {
         #if defined(TERMCOLOR_OS_MACOS) || defined(TERMCOLOR_OS_LINUX)
             stream << "\033[7m";
@@ -146,7 +164,7 @@ namespace termcolor
     inline
     std::ostream& concealed(std::ostream& stream)
     {
-        if (_internal::is_atty(stream))
+        if (_internal::is_colorized(stream))
         {
         #if defined(TERMCOLOR_OS_MACOS) || defined(TERMCOLOR_OS_LINUX)
             stream << "\033[8m";
@@ -160,7 +178,7 @@ namespace termcolor
     inline
     std::ostream& grey(std::ostream& stream)
     {
-        if (_internal::is_atty(stream))
+        if (_internal::is_colorized(stream))
         {
         #if defined(TERMCOLOR_OS_MACOS) || defined(TERMCOLOR_OS_LINUX)
             stream << "\033[30m";
@@ -176,7 +194,7 @@ namespace termcolor
     inline
     std::ostream& red(std::ostream& stream)
     {
-        if (_internal::is_atty(stream))
+        if (_internal::is_colorized(stream))
         {
         #if defined(TERMCOLOR_OS_MACOS) || defined(TERMCOLOR_OS_LINUX)
             stream << "\033[31m";
@@ -192,7 +210,7 @@ namespace termcolor
     inline
     std::ostream& green(std::ostream& stream)
     {
-        if (_internal::is_atty(stream))
+        if (_internal::is_colorized(stream))
         {
         #if defined(TERMCOLOR_OS_MACOS) || defined(TERMCOLOR_OS_LINUX)
             stream << "\033[32m";
@@ -208,7 +226,7 @@ namespace termcolor
     inline
     std::ostream& yellow(std::ostream& stream)
     {
-        if (_internal::is_atty(stream))
+        if (_internal::is_colorized(stream))
         {
         #if defined(TERMCOLOR_OS_MACOS) || defined(TERMCOLOR_OS_LINUX)
             stream << "\033[33m";
@@ -224,7 +242,7 @@ namespace termcolor
     inline
     std::ostream& blue(std::ostream& stream)
     {
-        if (_internal::is_atty(stream))
+        if (_internal::is_colorized(stream))
         {
         #if defined(TERMCOLOR_OS_MACOS) || defined(TERMCOLOR_OS_LINUX)
             stream << "\033[34m";
@@ -240,7 +258,7 @@ namespace termcolor
     inline
     std::ostream& magenta(std::ostream& stream)
     {
-        if (_internal::is_atty(stream))
+        if (_internal::is_colorized(stream))
         {
         #if defined(TERMCOLOR_OS_MACOS) || defined(TERMCOLOR_OS_LINUX)
             stream << "\033[35m";
@@ -256,7 +274,7 @@ namespace termcolor
     inline
     std::ostream& cyan(std::ostream& stream)
     {
-        if (_internal::is_atty(stream))
+        if (_internal::is_colorized(stream))
         {
         #if defined(TERMCOLOR_OS_MACOS) || defined(TERMCOLOR_OS_LINUX)
             stream << "\033[36m";
@@ -272,7 +290,7 @@ namespace termcolor
     inline
     std::ostream& white(std::ostream& stream)
     {
-        if (_internal::is_atty(stream))
+        if (_internal::is_colorized(stream))
         {
         #if defined(TERMCOLOR_OS_MACOS) || defined(TERMCOLOR_OS_LINUX)
             stream << "\033[37m";
@@ -290,7 +308,7 @@ namespace termcolor
     inline
     std::ostream& on_grey(std::ostream& stream)
     {
-        if (_internal::is_atty(stream))
+        if (_internal::is_colorized(stream))
         {
         #if defined(TERMCOLOR_OS_MACOS) || defined(TERMCOLOR_OS_LINUX)
             stream << "\033[40m";
@@ -306,7 +324,7 @@ namespace termcolor
     inline
     std::ostream& on_red(std::ostream& stream)
     {
-        if (_internal::is_atty(stream))
+        if (_internal::is_colorized(stream))
         {
         #if defined(TERMCOLOR_OS_MACOS) || defined(TERMCOLOR_OS_LINUX)
             stream << "\033[41m";
@@ -322,7 +340,7 @@ namespace termcolor
     inline
     std::ostream& on_green(std::ostream& stream)
     {
-        if (_internal::is_atty(stream))
+        if (_internal::is_colorized(stream))
         {
         #if defined(TERMCOLOR_OS_MACOS) || defined(TERMCOLOR_OS_LINUX)
             stream << "\033[42m";
@@ -338,7 +356,7 @@ namespace termcolor
     inline
     std::ostream& on_yellow(std::ostream& stream)
     {
-        if (_internal::is_atty(stream))
+        if (_internal::is_colorized(stream))
         {
         #if defined(TERMCOLOR_OS_MACOS) || defined(TERMCOLOR_OS_LINUX)
             stream << "\033[43m";
@@ -354,7 +372,7 @@ namespace termcolor
     inline
     std::ostream& on_blue(std::ostream& stream)
     {
-        if (_internal::is_atty(stream))
+        if (_internal::is_colorized(stream))
         {
         #if defined(TERMCOLOR_OS_MACOS) || defined(TERMCOLOR_OS_LINUX)
             stream << "\033[44m";
@@ -370,7 +388,7 @@ namespace termcolor
     inline
     std::ostream& on_magenta(std::ostream& stream)
     {
-        if (_internal::is_atty(stream))
+        if (_internal::is_colorized(stream))
         {
         #if defined(TERMCOLOR_OS_MACOS) || defined(TERMCOLOR_OS_LINUX)
             stream << "\033[45m";
@@ -386,7 +404,7 @@ namespace termcolor
     inline
     std::ostream& on_cyan(std::ostream& stream)
     {
-        if (_internal::is_atty(stream))
+        if (_internal::is_colorized(stream))
         {
         #if defined(TERMCOLOR_OS_MACOS) || defined(TERMCOLOR_OS_LINUX)
             stream << "\033[46m";
@@ -402,7 +420,7 @@ namespace termcolor
     inline
     std::ostream& on_white(std::ostream& stream)
     {
-        if (_internal::is_atty(stream))
+        if (_internal::is_colorized(stream))
         {
         #if defined(TERMCOLOR_OS_MACOS) || defined(TERMCOLOR_OS_LINUX)
             stream << "\033[47m";
@@ -438,6 +456,14 @@ namespace termcolor
             return 0;
         }
 
+        // Say whether a given stream should be colorized or not. It's always
+        // true for ATTY streams and may be true for streams marked with
+        // colorize flag.
+        inline
+        bool is_colorized(std::ostream& stream)
+        {
+            return is_atty(stream) || static_cast<bool>(stream.iword(colorize_index));
+        }
 
         //! Test whether a given `std::ostream` object refers to
         //! a terminal.
@@ -460,7 +486,6 @@ namespace termcolor
         #endif
         }
 
-
     #if defined(TERMCOLOR_OS_WINDOWS)
         //! Change Windows Terminal colors attribute. If some
         //! parameter is `-1` then attribute won't changed.
@@ -468,6 +493,13 @@ namespace termcolor
         {
             // yeah, i know.. it's ugly, it's windows.
             static WORD defaultAttributes = 0;
+
+            // Windows doesn't have ANSI escape sequences and so we use special
+            // API to change Terminal output color. That means we can't
+            // manipulate colors by means of "std::stringstream" and hence
+            // should do nothing in this case.
+            if (!_internal::is_atty(stream))
+                return;
 
             // get terminal handle
             HANDLE hTerminal = INVALID_HANDLE_VALUE;

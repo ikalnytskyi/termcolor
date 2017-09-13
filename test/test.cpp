@@ -74,9 +74,19 @@ int main(int /*argc*/, char** /*argv*/)
     std::cout << concealed << "concealed message"  << reset << std::endl;
     std::cout              << "default message"    << std::endl;
 
-    // test there's no crash with stringstream
-    std::stringstream ss;
-    ss << grey << "ok";
+    // test ansi escape characters are skipped for streams
+    std::stringstream s1;
+    s1 << red << "term" << blue << on_yellow << "color";
+
+    if (s1.str() != "termcolor")
+        return 1;
+
+    // test ansi escape characters are preserved for streams if asked
+    std::stringstream s2;
+    s2 << colorize << red << "term" << nocolorize << blue << "color";
+
+    if (s2.str() != "\033[31m" "termcolor")
+        return 2;
 
     return 0;
 }

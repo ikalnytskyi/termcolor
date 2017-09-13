@@ -62,15 +62,27 @@ setting you have to reset termcolor's settings. It can be done by using
     std::cout << termcolor::red << "Hello, Colorful World!" << std::endl;
     std::cout << termcolor::reset << "Here I'm!" << std::endl;
 
+By default, Termcolor ignores any colors for non-tty streams
+(e.g. ``std::stringstream``), so::
+
+    std::stringstream ss;
+    ss << termcolor::red << "unicorn";
+    std::cout << ss.str();
+
+would print «unicorn» using default color, not red. In order to change this
+behaviour one can use ``termcolor::colorize`` manipulator that enforce colors
+no matter what.
+
 
 What manipulators are supported?
 --------------------------------
 
-The manipulators are divided into three groups:
+The manipulators are divided into four groups:
 
 * *foreground*, which changes text color;
 * *background*, which changes text background color;
-* *attributes*, which changes some text style (bold, underline, etc).
+* *attributes*, which changes some text style (bold, underline, etc);
+* *control*, which changes termcolor's behaviour.
 
 
 Foreground manipulators
@@ -110,3 +122,11 @@ Attribute manipulators
 #. ``termcolor::blink``
 #. ``termcolor::reverse``
 #. ``termcolor::concealed``
+
+Control manipulators
+....................
+
+(so far they don't supported by Windows)
+
+#. ``termcolor::colorize``
+#. ``termcolor::nocolorize``

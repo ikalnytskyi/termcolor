@@ -24,7 +24,7 @@ do whatever you want as long as copyright sticks around.
 Installation
 ------------
 
-Add ``termcolor.hpp`` to the project and use provided stream manimulators
+Add ``termcolor.hpp`` to the project and use provided stream manipulators
 from the ``termcolor`` namespace.
 
 

@@ -1,18 +1,103 @@
 sudo: false
 language: cpp
 
-os:
-  - linux
-  - osx
-
-compiler:
-  - clang
-  - gcc
+before_install:
+  - eval "CXX=${COMPILER}"
 
 script:
   - cmake .
   - make
   - make run
+
+jobs:
+  include:
+    - os: linux
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages: g++-5
+      env: COMPILER="g++-5"
+
+    - os: linux
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages: g++-6
+      env: COMPILER="g++-6"
+
+    - os: linux
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages: g++-7
+      env: COMPILER="g++-7"
+
+    - os: linux
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+            - llvm-toolchain-precise-3.8
+          packages: clang-3.8
+      env: COMPILER="clang++-3.8"
+
+    - os: linux
+      addons:
+        apt:
+          sources:
+            - llvm-toolchain-trusty-3.9
+          packages: clang-3.9
+      env: COMPILER="clang++-3.9"
+
+    - os: linux
+      addons:
+        apt:
+          sources:
+            - llvm-toolchain-trusty-4.0
+          packages: clang-4.0
+      env: COMPILER="clang++-4.0"
+
+    - os: linux
+      addons:
+        apt:
+          sources:
+            - llvm-toolchain-trusty-5.0
+          packages: clang-5.0
+      env: COMPILER="clang++-5.0"
+
+    - os: osx
+      osx_image: xcode8.3
+
+    - os: osx
+      osx_image: xcode9.4
+
+    - os: osx
+      osx_image: xcode10
+
+    - script:
+        - mkdir -p /tmp/termcolor && cd "$_"
+        - cmake $TRAVIS_BUILD_DIR
+        - sudo make install
+
+        - mkdir -p /tmp/example && cd "$_"
+        - cmake $TRAVIS_BUILD_DIR/examples/cmake-package
+        - make && ./example
+      name: cmake package
+
+    - script:
+        - mkdir -p /tmp/example && cd "$_"
+        - cmake $TRAVIS_BUILD_DIR/examples/cmake-submodule
+        - make && ./example
+      name: cmake submodule
+
+    - script:
+        - mkdir -p /tmp/example && cd "$_"
+        - cmake $TRAVIS_BUILD_DIR/examples/cmake-external
+        - make && ./example
+      name: cmake external
 
 notifications:
   email: false

@@ -10,7 +10,7 @@ FetchContent_GetProperties(termcolor)
 
 if(NOT termcolor_POPULATED)
   FetchContent_Populate(termcolor)
-  add_subdirectory(${termcolor_SOURCE_DIR} ${termcolor_BINARY_DIR})
+  add_subdirectory(${termcolor_SOURCE_DIR} ${termcolor_BINARY_DIR} EXCLUDE_FROM_ALL)
 endif()
 
 add_executable(${CMAKE_PROJECT_NAME} example.cpp)

@@ -88,6 +88,13 @@ jobs:
       name: cmake package
 
     - script:
+        - sudo pip install cmake
+        - mkdir -p /tmp/example && cd "$_"
+        - /usr/local/bin/cmake $TRAVIS_BUILD_DIR/examples/cmake-fetch
+        - make && ./example
+      name: cmake fetch
+
+    - script:
         - mkdir -p /tmp/example && cd "$_"
         - cmake $TRAVIS_BUILD_DIR/examples/cmake-submodule
         - make && ./example

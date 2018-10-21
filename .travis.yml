@@ -1,13 +1,11 @@
 sudo: false
 language: cpp
 
-before_install:
-  - eval "CXX=${COMPILER}"
-
 script:
-  - cmake .
+  - eval "CXX=${COMPILER}"
+  - cmake -DTERMCOLOR_TESTS=ON .
   - make
-  - make run
+  - ./test_termcolor
 
 jobs:
   include:

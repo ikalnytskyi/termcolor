@@ -9,6 +9,10 @@
 //! :license: BSD, see LICENSE for details
 //!
 
+#if defined(_WIN32) || defined(_WIN64)
+#   define NO_ANSI_ESCAPE_SEQUENCES
+#endif
+
 // Cygwin's C++ libraries seem to be stricter than other unix platforms.
 // Strict standard conformance must be disabled by passing -U__STRICT_ANSI__
 // (or equivalent option) to the compiler, or by #undef __STRICT_ANSI__
@@ -83,12 +87,14 @@ int main(int /*argc*/, char** /*argv*/)
     if (s1.str() != "termcolor")
         return 1;
 
+#ifndef NO_ANSI_ESCAPE_SEQUENCES
     // test ansi escape characters are preserved for streams if asked
     std::stringstream s2;
     s2 << colorize << red << "term" << nocolorize << blue << "color";
 
     if (s2.str() != "\033[31m" "termcolor")
         return 2;
+#endif  // NO_ANSI_ESCAPE_SEQUENCES
 
     return 0;
 }

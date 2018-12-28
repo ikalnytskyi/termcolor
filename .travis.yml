@@ -1,10 +1,9 @@
-sudo: false
 language: cpp
 
 script:
   - eval "CXX=${COMPILER}"
   - cmake -DTERMCOLOR_TESTS=ON .
-  - make
+  - cmake --build .
   - ./test_termcolor
 
 jobs:
@@ -107,16 +106,22 @@ jobs:
       env: COMPILER="clang++-9"
 
     - os: osx
-      osx_image: xcode8.3
-
-    - os: osx
-      osx_image: xcode9.4
-
-    - os: osx
       osx_image: xcode10
 
     - os: osx
       osx_image: xcode11
+
+    - os: windows
+      script:
+        - cmake -DTERMCOLOR_TESTS=ON .
+        - cmake --build .
+        - ./Debug/test_termcolor.exe
+
+    - os: windows
+      script:
+        - cmake -DCMAKE_SH="CMAKE_SH-NOTFOUND" -DTERMCOLOR_TESTS=ON -G "MinGW Makefiles" .
+        - cmake --build .
+        - ./test_termcolor
 
     - script:
         - mkdir -p /tmp/termcolor && cd "$_"

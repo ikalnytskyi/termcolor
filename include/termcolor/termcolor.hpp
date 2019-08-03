@@ -453,7 +453,7 @@ namespace termcolor
             else if ((&stream == &std::cerr) || (&stream == &std::clog))
                 return stderr;
 
-            return 0;
+            return nullptr;
         }
 
         // Say whether a given stream should be colorized or not. It's always

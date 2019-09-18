@@ -72,6 +72,8 @@ int main(int /*argc*/, char** /*argv*/)
     std::cout << blink     << "blinked message"    << reset << std::endl;
     std::cout << reverse   << "reversed message"   << reset << std::endl;
     std::cout << concealed << "concealed message"  << reset << std::endl;
+    std::cout << italic << "italic message"  << reset << std::endl;
+    std::cout << crossed << "crossed message"  << reset << std::endl;
     std::cout              << "default message"    << std::endl;
 
     // test ansi escape characters are skipped for streams

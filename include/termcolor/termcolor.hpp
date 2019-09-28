@@ -174,6 +174,32 @@ namespace termcolor
         return stream;
     }
 
+    inline
+    std::ostream& italic(std::ostream& stream)
+    {
+        if (_internal::is_colorized(stream))
+        {
+        #if defined(TERMCOLOR_OS_MACOS) || defined(TERMCOLOR_OS_LINUX)
+            stream << "\033[3m";
+        #elif defined(TERMCOLOR_OS_WINDOWS)
+        #endif
+        }
+        return stream;
+    }
+
+    inline
+    std::ostream& crossed(std::ostream& stream)
+    {
+        if (_internal::is_colorized(stream))
+        {
+        #if defined(TERMCOLOR_OS_MACOS) || defined(TERMCOLOR_OS_LINUX)
+            stream << "\033[9m";
+        #elif defined(TERMCOLOR_OS_WINDOWS)
+        #endif
+        }
+        return stream;
+    }
+
 
     inline
     std::ostream& grey(std::ostream& stream)

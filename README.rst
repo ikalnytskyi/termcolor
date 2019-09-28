@@ -122,10 +122,12 @@ Attribute manipulators
 
 #. ``termcolor::bold``
 #. ``termcolor::dark``
+#. ``termcolor::italic``
 #. ``termcolor::underline``
 #. ``termcolor::blink``
 #. ``termcolor::reverse``
 #. ``termcolor::concealed``
+#. ``termcolor::crossed``
 
 Control manipulators
 ....................

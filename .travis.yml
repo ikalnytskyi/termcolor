@@ -38,7 +38,7 @@ jobs:
         apt:
           sources:
             - ubuntu-toolchain-r-test
-            - llvm-toolchain-precise-3.8
+            - llvm-toolchain-xenial-3.8
           packages: clang-3.8
       env: COMPILER="clang++-3.8"
 
@@ -46,7 +46,8 @@ jobs:
       addons:
         apt:
           sources:
-            - llvm-toolchain-trusty-3.9
+            - ubuntu-toolchain-r-test
+            - llvm-toolchain-xenial-3.9
           packages: clang-3.9
       env: COMPILER="clang++-3.9"
 
@@ -54,7 +55,8 @@ jobs:
       addons:
         apt:
           sources:
-            - llvm-toolchain-trusty-4.0
+            - ubuntu-toolchain-r-test
+            - llvm-toolchain-xenial-4.0
           packages: clang-4.0
       env: COMPILER="clang++-4.0"
 
@@ -62,9 +64,47 @@ jobs:
       addons:
         apt:
           sources:
-            - llvm-toolchain-trusty-5.0
+            - ubuntu-toolchain-r-test
+            - llvm-toolchain-xenial-5.0
           packages: clang-5.0
       env: COMPILER="clang++-5.0"
+
+    - os: linux
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+            - llvm-toolchain-xenial-6.0
+          packages: clang-6.0
+      env: COMPILER="clang++-6.0"
+
+    - os: linux
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+            - llvm-toolchain-xenial-7
+          packages: clang-7
+      env: COMPILER="clang++-7"
+
+    - os: linux
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+            - llvm-toolchain-xenial-8
+          packages: clang-8
+      env: COMPILER="clang++-8"
+
+    - os: linux
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+            - sourceline: deb http://apt.llvm.org/xenial/ llvm-toolchain-xenial-9 main
+              key_url: https://apt.llvm.org/llvm-snapshot.gpg.key
+          packages: clang-9
+      env: COMPILER="clang++-9"
 
     - os: osx
       osx_image: xcode8.3
@@ -74,6 +114,9 @@ jobs:
 
     - os: osx
       osx_image: xcode10
+
+    - os: osx
+      osx_image: xcode11
 
     - script:
         - mkdir -p /tmp/termcolor && cd "$_"

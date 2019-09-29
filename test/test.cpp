@@ -75,6 +75,12 @@ int main(int /*argc*/, char** /*argv*/)
     std::cout << concealed << "concealed message"  << reset << std::endl;
     std::cout << crossed   << "crossed message"    << reset << std::endl;
     std::cout              << "default message"    << std::endl;
+    std::cout << std::endl;
+
+    // test clog/cerr streams
+    std::clog << "formatted " << yellow << "std::clog" << reset << " message" << std::endl;
+    std::cerr << "formatted " << red    << "std::cerr" << reset << " message" << std::endl;
+    std::cout << std::endl;
 
     // test ansi escape characters are skipped for streams
     std::stringstream s1;

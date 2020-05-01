@@ -202,6 +202,41 @@ namespace termcolor
         return stream;
     }
 
+    template <int code>
+    inline
+    std::ostream& fg_color(std::ostream& stream)
+    {
+        #if defined(TERMCOLOR_OS_MACOS) || defined(TERMCOLOR_OS_LINUX)
+        if (_internal::is_colorized(stream))
+        {
+            char command[14];
+            const char format[] = "\033[38;5;%dm"; 
+            std::sprintf(command, format, code);
+            stream << command;
+        }
+        #elif
+        #   error unsupported platform 
+        #endif
+        return stream;
+    }
+
+    template <int code>
+    inline
+    std::ostream& bg_color(std::ostream& stream)
+    {
+        #if defined(TERMCOLOR_OS_MACOS) || defined(TERMCOLOR_OS_LINUX)
+        if (_internal::is_colorized(stream))
+        {
+            char command[14];
+            const char format[] = "\033[48;5;%dm"; 
+            std::sprintf(command, format, code);
+            stream << command;
+        }
+        #elif
+        #   error unsupported platform 
+        #endif
+        return stream;
+    }
 
     inline
     std::ostream& grey(std::ostream& stream)

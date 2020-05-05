@@ -201,6 +201,39 @@ namespace termcolor
         }
         return stream;
     }
+    
+    
+    #if defined(TERMCOLOR_OS_MACOS) || defined(TERMCOLOR_OS_LINUX)
+
+    template <uint8_t code>
+    inline
+    std::ostream& color(std::ostream& stream)
+    {
+        if (_internal::is_colorized(stream))
+        {
+            char command[14];
+            std::snprintf(command, 14, "\033[38;5;%dm", code);
+            stream << command;
+        }
+        
+        return stream;
+    }
+
+    template <uint8_t code>
+    inline
+    std::ostream& on_color(std::ostream& stream)
+    {
+        if (_internal::is_colorized(stream))
+        {
+            char command[14];
+            std::snprintf(command, 14, "\033[48;5;%dm", code);
+            stream << command;
+        }
+
+        return stream;
+    }
+
+    #endif // defined(TERMCOLOR_OS_MACOS) || defined(TERMCOLOR_OS_LINUX)
 
 
     inline

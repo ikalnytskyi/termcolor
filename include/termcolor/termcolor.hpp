@@ -202,16 +202,15 @@ namespace termcolor
         return stream;
     }
 
-    template <int code>
+    template <uint8_t code>
     inline
-    std::ostream& fg_color(std::ostream& stream)
+    std::ostream& color(std::ostream& stream)
     {
         #if defined(TERMCOLOR_OS_MACOS) || defined(TERMCOLOR_OS_LINUX)
         if (_internal::is_colorized(stream))
         {
             char command[14];
-            const char format[] = "\033[38;5;%dm"; 
-            std::sprintf(command, format, code);
+            std::snprintf(command, 14, "\033[38;5;%dm", code);
             stream << command;
         }
         #elif
@@ -220,16 +219,15 @@ namespace termcolor
         return stream;
     }
 
-    template <int code>
+    template <uint8_t code>
     inline
-    std::ostream& bg_color(std::ostream& stream)
+    std::ostream& on_color(std::ostream& stream)
     {
         #if defined(TERMCOLOR_OS_MACOS) || defined(TERMCOLOR_OS_LINUX)
         if (_internal::is_colorized(stream))
         {
             char command[14];
-            const char format[] = "\033[48;5;%dm"; 
-            std::sprintf(command, format, code);
+            std::snprintf(command, 14, "\033[48;5;%dm", code);
             stream << command;
         }
         #elif

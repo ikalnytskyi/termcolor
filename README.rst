@@ -42,7 +42,8 @@ manipulators. The typical «Hello World» application is below:
     int main(int /*argc*/, char** /*argv*/)
     {
         std::cout << termcolor::red << "Hello, ";
-        std::cout << termcolor::color<100> << "Colorful World!";
+        std::cout << termcolor::color<100> << "Colorful ";
+        std::cout << termcolor::color<211, 54, 130> << "World!";
         std::cout << std::endl;
         return 0;
     }
@@ -103,6 +104,7 @@ Foreground manipulators
 #. ``termcolor::cyan``
 #. ``termcolor::white``
 #. ``termcolor::color<256_COLOR_CODE>``
+#. ``termcolor::color<RED, GREEN, BLUE>``
 
 
 Background manipulators
@@ -117,6 +119,7 @@ Background manipulators
 #. ``termcolor::on_cyan``
 #. ``termcolor::on_white``
 #. ``termcolor::on_color<256_COLOR_CODE>``
+#. ``termcolor::on_color<RED, GREEN, BLUE>``
 
 
 Attribute manipulators

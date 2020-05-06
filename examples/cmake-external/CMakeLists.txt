@@ -12,6 +12,9 @@ ExternalProject_Add(termcolor_project
   # the hooks.
   CONFIGURE_COMMAND "" BUILD_COMMAND "" INSTALL_COMMAND "")
 ExternalProject_Get_Property(termcolor_project SOURCE_DIR)
+
+set(CMAKE_CXX_STANDARD 11)
+
 include_directories(${SOURCE_DIR}/include)
 add_library(termcolor INTERFACE IMPORTED)
 add_dependencies(termcolor termcolor_project)

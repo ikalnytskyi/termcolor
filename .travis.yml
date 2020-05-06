@@ -1,7 +1,7 @@
 language: cpp
 
 script:
-  - eval "CXX=${COMPILER}"
+  - eval "CXX=${COMPILER} CXXFLAGS=-std=c++11"
   - cmake -DTERMCOLOR_TESTS=ON .
   - cmake --build .
   - ./test_termcolor

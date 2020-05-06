@@ -100,6 +100,7 @@ Foreground manipulators
 #. ``termcolor::magenta``
 #. ``termcolor::cyan``
 #. ``termcolor::white``
+#. ``termcolor::color<COLOR_CODE>``
 
 
 Background manipulators
@@ -113,6 +114,7 @@ Background manipulators
 #. ``termcolor::on_magenta``
 #. ``termcolor::on_cyan``
 #. ``termcolor::on_white``
+#. ``termcolor::on_color<COLOR_CODE>``
 
 
 Attribute manipulators

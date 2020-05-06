@@ -1,5 +1,5 @@
 Termcolor
-=========
+======
 
 .. image:: docs/_static/example.png
    :alt: termcolor in action
@@ -86,7 +86,7 @@ The manipulators are divided into four groups:
 * *foreground*, which changes text color;
 * *background*, which changes text background color;
 * *attributes*, which changes some text style (bold, underline, etc);
-* *control*, which changes termcolor's behaviour.
+* *scontrol*, which changes termcolor's behaviour.
 
 
 Foreground manipulators
@@ -100,6 +100,7 @@ Foreground manipulators
 #. ``termcolor::magenta``
 #. ``termcolor::cyan``
 #. ``termcolor::white``
+#. ``termcolor::color<COLOR_CODE>``
 
 
 Background manipulators
@@ -113,6 +114,7 @@ Background manipulators
 #. ``termcolor::on_magenta``
 #. ``termcolor::on_cyan``
 #. ``termcolor::on_white``
+#. ``termcolor::on_color<COLOR_CODE>``
 
 
 Attribute manipulators

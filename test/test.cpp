@@ -40,11 +40,13 @@ using namespace termcolor;
 
 int main(int /*argc*/, char** /*argv*/)
 {
+    // test foreground colors by code
     std::cout << color<2>    << "code   2" << reset << std::endl;
     std::cout << color<126>  << "code 126" << reset << std::endl;
     std::cout << color<196>  << "code 196" << reset << std::endl;
     std::cout << std::endl;
 
+    // test background colors by code
     std::cout << on_color<2>    << "bg code   2" << reset << std::endl;
     std::cout << on_color<126>  << "bg code 126" << reset << std::endl;
     std::cout << on_color<196>  << "bg code 196" << reset << std::endl;

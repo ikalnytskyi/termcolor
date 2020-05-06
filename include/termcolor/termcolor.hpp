@@ -42,7 +42,6 @@
 #include <cstdio>
 
 
-
 namespace termcolor
 {
     // Forward declaration of the `_internal` namespace.
@@ -90,7 +89,6 @@ namespace termcolor
         return stream;
     }
 
-
     inline
     std::ostream& bold(std::ostream& stream)
     {
@@ -103,7 +101,6 @@ namespace termcolor
         }
         return stream;
     }
-
 
     inline
     std::ostream& dark(std::ostream& stream)
@@ -118,7 +115,6 @@ namespace termcolor
         return stream;
     }
 
-
     inline
     std::ostream& italic(std::ostream& stream)
     {
@@ -131,7 +127,6 @@ namespace termcolor
         }
         return stream;
     }
-
 
     inline
     std::ostream& underline(std::ostream& stream)
@@ -146,7 +141,6 @@ namespace termcolor
         return stream;
     }
 
-
     inline
     std::ostream& blink(std::ostream& stream)
     {
@@ -159,7 +153,6 @@ namespace termcolor
         }
         return stream;
     }
-
 
     inline
     std::ostream& reverse(std::ostream& stream)
@@ -174,7 +167,6 @@ namespace termcolor
         return stream;
     }
 
-
     inline
     std::ostream& concealed(std::ostream& stream)
     {
@@ -188,7 +180,6 @@ namespace termcolor
         return stream;
     }
 
-
     inline
     std::ostream& crossed(std::ostream& stream)
     {
@@ -201,40 +192,36 @@ namespace termcolor
         }
         return stream;
     }
-    
-    
-    #if defined(TERMCOLOR_OS_MACOS) || defined(TERMCOLOR_OS_LINUX)
 
-    template <uint8_t code>
-    inline
+    template <uint8_t code> inline
     std::ostream& color(std::ostream& stream)
     {
         if (_internal::is_colorized(stream))
         {
+        #if defined(TERMCOLOR_OS_MACOS) || defined(TERMCOLOR_OS_LINUX)
             char command[14];
             std::snprintf(command, 14, "\033[38;5;%dm", code);
             stream << command;
+        #elif defined(TERMCOLOR_OS_WINDOWS)
+        #endif
         }
-        
         return stream;
     }
 
-    template <uint8_t code>
-    inline
+    template <uint8_t code> inline
     std::ostream& on_color(std::ostream& stream)
     {
         if (_internal::is_colorized(stream))
         {
+        #if defined(TERMCOLOR_OS_MACOS) || defined(TERMCOLOR_OS_LINUX)
             char command[14];
             std::snprintf(command, 14, "\033[48;5;%dm", code);
             stream << command;
+        #elif defined(TERMCOLOR_OS_WINDOWS)
+        #endif
         }
-
         return stream;
     }
-
-    #endif // defined(TERMCOLOR_OS_MACOS) || defined(TERMCOLOR_OS_LINUX)
-
 
     inline
     std::ostream& grey(std::ostream& stream)

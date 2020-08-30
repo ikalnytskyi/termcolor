@@ -136,6 +136,7 @@ namespace termcolor
         #if defined(TERMCOLOR_OS_MACOS) || defined(TERMCOLOR_OS_LINUX)
             stream << "\033[4m";
         #elif defined(TERMCOLOR_OS_WINDOWS)
+            _internal::win_change_attributes(stream, -1, COMMON_LVB_UNDERSCORE);
         #endif
         }
         return stream;

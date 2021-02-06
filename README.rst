@@ -154,3 +154,11 @@ Control manipulators
 
 #. ``termcolor::colorize``
 #. ``termcolor::nocolorize``
+
+
+Caveats
+-------
+
+#. On Windows, due to internal usage of ``<windows.h>``, global namespace could
+   be polluted with `min`/`max` macros. If such effect is desireable, please
+   consider using ``#define NOMINMAX`` before ``#include <termcolor.hpp>``.

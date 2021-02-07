@@ -114,6 +114,14 @@ Foreground manipulators
 #. ``termcolor::magenta``
 #. ``termcolor::cyan``
 #. ``termcolor::white``
+#. ``termcolor::bright_grey``
+#. ``termcolor::bright_red``
+#. ``termcolor::bright_green``
+#. ``termcolor::bright_yellow``
+#. ``termcolor::bright_blue``
+#. ``termcolor::bright_magenta``
+#. ``termcolor::bright_cyan``
+#. ``termcolor::bright_white``
 #. ``termcolor::color<256_COLOR_CODE>``
 #. ``termcolor::color<RED, GREEN, BLUE>``
 
@@ -129,6 +137,14 @@ Background manipulators
 #. ``termcolor::on_magenta``
 #. ``termcolor::on_cyan``
 #. ``termcolor::on_white``
+#. ``termcolor::on_bright_grey``
+#. ``termcolor::on_bright_red``
+#. ``termcolor::on_bright_green``
+#. ``termcolor::on_bright_yellow``
+#. ``termcolor::on_bright_blue``
+#. ``termcolor::on_bright_magenta``
+#. ``termcolor::on_bright_cyan``
+#. ``termcolor::on_bright_white``
 #. ``termcolor::on_color<256_COLOR_CODE>``
 #. ``termcolor::on_color<RED, GREEN, BLUE>``
 

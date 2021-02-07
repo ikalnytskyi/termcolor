@@ -62,6 +62,19 @@ int main(int /*argc*/, char** /*argv*/)
     std::cout            << "default message" << std::endl;
     std::cout << std::endl;
 
+    // test bright foreground colors
+    std::cout << bright_grey    << "bright grey message"    << reset << std::endl;
+    std::cout << bright_red     << "bright red message"     << reset << std::endl;
+    std::cout << bright_green   << "bright green message"   << reset << std::endl;
+    std::cout << bright_yellow  << "bright yellow message"  << reset << std::endl;
+    std::cout << bright_blue    << "bright blue message"    << reset << std::endl;
+    std::cout << bright_magenta << "bright magenta message" << reset << std::endl;
+    std::cout << bright_cyan    << "bright cyan message"    << reset << std::endl;
+    std::cout << bright_white   << "bright white message"   << reset << std::endl;
+    std::cout                 << "default message"      << std::endl;
+    std::cout << std::endl;
+
+
     // test background colors
     std::cout << on_grey    << "message on grey"    << reset << std::endl;
     std::cout << on_red     << "message on red"     << reset << std::endl;
@@ -74,9 +87,31 @@ int main(int /*argc*/, char** /*argv*/)
     std::cout               << "default message"    << std::endl;
     std::cout << std::endl;
 
+    // test bright background colors
+    std::cout << on_bright_grey    << "message on bright grey"    << reset << std::endl;
+    std::cout << on_bright_red     << "message on bright red"     << reset << std::endl;
+    std::cout << on_bright_green   << "message on bright green"   << reset << std::endl;
+    std::cout << on_bright_yellow  << "message on bright yellow"  << reset << std::endl;
+    std::cout << on_bright_blue    << "message on bright blue"    << reset << std::endl;
+    std::cout << on_bright_magenta << "message on bright magenta" << reset << std::endl;
+    std::cout << on_bright_cyan    << "message on bright cyan"    << reset << std::endl;
+    std::cout << on_bright_white   << "message on bright white"   << reset << std::endl;
+    std::cout                    << "default message"         << std::endl;
+    std::cout << std::endl;
+
     // test foreground and backgrounds colors
     std::cout << red  << on_white  << "red on white"   << reset << std::endl;
     std::cout << blue << on_yellow << "blue on yellow" << reset << std::endl;
+    std::cout << std::endl;
+
+    // test bright foreground or bright background colors
+    std::cout << bright_red << on_white << "bright red on white" << reset << std::endl;
+    std::cout << blue << on_bright_yellow << "blue on bright yellow" << reset << std::endl;
+    std::cout << std::endl;
+
+    // test bright foreground and bright background colors
+    std::cout << bright_red  << on_bright_white  << "bright red on bright white"   << reset << std::endl;
+    std::cout << bright_blue << on_bright_yellow << "bright blue on bright yellow" << reset << std::endl;
     std::cout << std::endl;
 
     // test unsual attributes

@@ -27,10 +27,18 @@ Installation
 Add ``termcolor.hpp`` to the project and use provided stream manipulators
 from the ``termcolor`` namespace.
 
-Vcpkg Integration
-------------
+Packaging Status
+................
 
-Alternatively, if you are using the vcpkg_ dependency manager you can download and install termcolor with CMake integration in a single command:
+.. image:: https://repology.org/badge/vertical-allrepos/termcolor.svg
+   :target: https://repology.org/project/termcolor/versions
+   :alt: Packaging Status
+
+Vcpkg Integration
+.................
+
+Alternatively, if you are using the vcpkg_ dependency manager you can
+download and install termcolor with CMake integration in a single command:
 
 .. _vcpkg: https://github.com/microsoft/vcpkg
 

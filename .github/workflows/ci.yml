@@ -1,0 +1,35 @@
+name: ci
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  test:
+    strategy:
+      matrix:
+        os:
+          - ubuntu-latest
+          - windows-latest
+          - macos-latest
+        include:
+          - os: ubuntu-latest
+            apt:
+              sources:
+                - ubuntu-toolchain-r-test
+              packages: g++-5
+            compiler: g++-5
+
+    env:
+      CXX: ${{ matrix.compiler }}
+      CXXFLAGS: -std=c++11
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - uses: actions/checkout@v2
+      - run: cmake -DTERMCOLOR_TESTS=ON .
+      - run: cmake --build .
+      - run: ./test_termcolor

@@ -1,0 +1,49 @@
+name: Cmake Examples
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:  
+  package:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - run: mkdir -p /tmp/termcolor && cd "$_"
+      - run: cmake $GITHUB_WORKSPACE
+      - run: sudo make install
+      
+      - run: mkdir -p /tmp/example && cd "$_"
+      - run: cmake $GITHUB_WORKSPACE/examples/cmake-package
+      - run: make && ./example
+
+  fetch:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - run: sudo pip install cmake
+      - run: mkdir -p /tmp/example && cd "$_"
+      - run: /usr/local/bin/cmake $GITHUB_WORKSPACE/examples/cmake-fetch
+      - run: make && ./example
+
+  submodule:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v2
+      - run: mkdir -p /tmp/example && cd "$_"
+      - run: cmake $GITHUB_WORKSPACE/examples/cmake-submodule
+      - run: make && ./example
+
+  external:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - run: mkdir -p /tmp/example && cd "$_"
+      - run: cmake $GITHUB_WORKSPACE/examples/cmake-external
+      - run: make && ./example

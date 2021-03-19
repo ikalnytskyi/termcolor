@@ -243,15 +243,10 @@ namespace termcolor
         if (_internal::is_colorized(stream))
         {
         #if defined(TERMCOLOR_USE_ANSI_ESCAPE_SEQUENCES)
-            if (std::is_same<CharT, wchar_t>::value) {
-                wchar_t command[12];
-                std::swprintf(command, sizeof(command), L"\033[38;5;%dm", code);
-            }
-            else {
-                char command[12];
-                std::snprintf(command, sizeof(command), "\033[38;5;%dm", code);
-            }
-            stream << command;
+            if (std::is_same<CharT, wchar_t>::value)
+                stream << L"\033[38;5;" << code << L"m";
+            else
+                stream << "\033[38;5;" << code << "m";
         #elif defined(TERMCOLOR_USE_WINDOWS_API)
         #endif
         }
@@ -264,15 +259,10 @@ namespace termcolor
         if (_internal::is_colorized(stream))
         {
         #if defined(TERMCOLOR_USE_ANSI_ESCAPE_SEQUENCES)
-            if (std::is_same<CharT, wchar_t>::value) {
-                wchar_t command[12];
-                std::swprintf(command, sizeof(command), L"\033[48;5;%dm", code);
-            }
-            else {
-                char command[12];
-                std::snprintf(command, sizeof(command), "\033[48;5;%dm", code);
-            }
-            stream << command;
+            if (std::is_same<CharT, wchar_t>::value)
+                stream << L"\033[48;5;" << code << L"m";
+            else
+                stream << "\033[48;5;" << code << "m";
         #elif defined(TERMCOLOR_USE_WINDOWS_API)
         #endif
         }
@@ -285,15 +275,10 @@ namespace termcolor
         if (_internal::is_colorized(stream))
         {
         #if defined(TERMCOLOR_USE_ANSI_ESCAPE_SEQUENCES)
-            if (std::is_same<CharT, wchar_t>::value) {
-                wchar_t command[12];
-                std::swprintf(command, sizeof(command), L"\033[38;2;%d;%d;%dm", r, g, b);
-            }
-            else {
-                char command[12];
-                std::snprintf(command, sizeof(command), "\033[38;2;%d;%d;%dm", r, g, b);
-            }
-            stream << command;
+            if (std::is_same<CharT, wchar_t>::value)
+                stream << L"\033[38;2;" << r << L";" << g << L";" << b << L"m";
+            else
+                stream << "\033[38;2;" << r << ";" << g << ";" << b << "m";
         #elif defined(TERMCOLOR_USE_WINDOWS_API)
         #endif
         }
@@ -306,15 +291,10 @@ namespace termcolor
         if (_internal::is_colorized(stream))
         {
         #if defined(TERMCOLOR_USE_ANSI_ESCAPE_SEQUENCES)
-            if (std::is_same<CharT, wchar_t>::value) {
-                wchar_t command[12];
-                std::swprintf(command, sizeof(command), L"\033[38;2;%d;%d;%dm", r, g, b);
-            }
-            else {
-                char command[12];
-                std::snprintf(command, sizeof(command), "\033[38;2;%d;%d;%dm", r, g, b);
-            }
-            stream << command;
+            if (std::is_same<CharT, wchar_t>::value)
+                stream << L"\033[48;2;" << r << L";" << g << L";" << b << L"m";
+            else
+                stream << "\033[48;2;" << r << ";" << g << ";" << b << "m";
         #elif defined(TERMCOLOR_USE_WINDOWS_API)
         #endif
         }

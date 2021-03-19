@@ -88,7 +88,7 @@ namespace termcolor
         if (_internal::is_colorized(stream))
         {
         #if defined(TERMCOLOR_USE_ANSI_ESCAPE_SEQUENCES)
-            stream << std::is_same_v<CharT, wchar_t> ? L"\033[00m" : "\033[00m";
+            stream << std::is_same<CharT, wchar_t>::value ? L"\033[00m" : "\033[00m";
         #elif defined(TERMCOLOR_USE_WINDOWS_API)
             _internal::win_change_attributes(stream, -1, -1);
         #endif
@@ -103,7 +103,7 @@ namespace termcolor
         if (_internal::is_colorized(stream))
         {
         #if defined(TERMCOLOR_USE_ANSI_ESCAPE_SEQUENCES)
-            stream << std::is_same_v<CharT, wchar_t> ? L"\033[1m" : "\033[1m";
+            stream << std::is_same<CharT, wchar_t>::value ? L"\033[1m" : "\033[1m";
         #elif defined(TERMCOLOR_USE_WINDOWS_API)
         #endif
         }
@@ -117,7 +117,7 @@ namespace termcolor
         if (_internal::is_colorized(stream))
         {
         #if defined(TERMCOLOR_USE_ANSI_ESCAPE_SEQUENCES)
-            stream << std::is_same_v<CharT, wchar_t> ? L"\033[2m" : "\033[2m";
+            stream << std::is_same<CharT, wchar_t>::value ? L"\033[2m" : "\033[2m";
         #elif defined(TERMCOLOR_USE_WINDOWS_API)
         #endif
         }
@@ -131,7 +131,7 @@ namespace termcolor
         if (_internal::is_colorized(stream))
         {
         #if defined(TERMCOLOR_USE_ANSI_ESCAPE_SEQUENCES)
-            stream << std::is_same_v<CharT, wchar_t> ? L"\033[3m" : "\033[3m";
+            stream << std::is_same<CharT, wchar_t>::value ? L"\033[3m" : "\033[3m";
         #elif defined(TERMCOLOR_USE_WINDOWS_API)
         #endif
         }
@@ -145,7 +145,7 @@ namespace termcolor
         if (_internal::is_colorized(stream))
         {
         #if defined(TERMCOLOR_USE_ANSI_ESCAPE_SEQUENCES)
-            stream << std::is_same_v<CharT, wchar_t> ? L"\033[4m" : "\033[4m";
+            stream << std::is_same<CharT, wchar_t>::value ? L"\033[4m" : "\033[4m";
         #elif defined(TERMCOLOR_USE_WINDOWS_API)
             _internal::win_change_attributes(stream, -1, COMMON_LVB_UNDERSCORE);
         #endif
@@ -160,7 +160,7 @@ namespace termcolor
         if (_internal::is_colorized(stream))
         {
         #if defined(TERMCOLOR_USE_ANSI_ESCAPE_SEQUENCES)
-            stream << std::is_same_v<CharT, wchar_t> ? L"\033[5m" : "\033[5m";
+            stream << std::is_same<CharT, wchar_t>::value ? L"\033[5m" : "\033[5m";
         #elif defined(TERMCOLOR_USE_WINDOWS_API)
         #endif
         }
@@ -174,7 +174,7 @@ namespace termcolor
         if (_internal::is_colorized(stream))
         {
         #if defined(TERMCOLOR_USE_ANSI_ESCAPE_SEQUENCES)
-            stream << std::is_same_v<CharT, wchar_t> ? L"\033[7m" : "\033[7m";
+            stream << std::is_same<CharT, wchar_t>::value ? L"\033[7m" : "\033[7m";
         #elif defined(TERMCOLOR_USE_WINDOWS_API)
         #endif
         }
@@ -188,7 +188,7 @@ namespace termcolor
         if (_internal::is_colorized(stream))
         {
         #if defined(TERMCOLOR_USE_ANSI_ESCAPE_SEQUENCES)
-            stream << std::is_same_v<CharT, wchar_t> ? L"\033[8m" : "\033[8m";
+            stream << std::is_same<CharT, wchar_t>::value ? L"\033[8m" : "\033[8m";
         #elif defined(TERMCOLOR_USE_WINDOWS_API)
         #endif
         }
@@ -202,7 +202,7 @@ namespace termcolor
         if (_internal::is_colorized(stream))
         {
         #if defined(TERMCOLOR_USE_ANSI_ESCAPE_SEQUENCES)
-            stream << std::is_same_v<CharT, wchar_t> ? L"\033[9m" : "\033[9m";
+            stream << std::is_same<CharT, wchar_t>::value ? L"\033[9m" : "\033[9m";
         #elif defined(TERMCOLOR_USE_WINDOWS_API)
         #endif
         }
@@ -216,7 +216,7 @@ namespace termcolor
         {
         #if defined(TERMCOLOR_USE_ANSI_ESCAPE_SEQUENCES)
             CharT command[12];
-            if (std::is_same_v<CharT, wchar_t>)
+            if (std::is_same<CharT, wchar_t>::value)
                 std::_snrpintf_s(command, sizeof(command), L"\033[38;5;%dm", code);
             else
                 std::snprintf(command, sizeof(command), "\033[38;5;%dm", code);
@@ -234,7 +234,7 @@ namespace termcolor
         {
         #if defined(TERMCOLOR_USE_ANSI_ESCAPE_SEQUENCES)
             CharT command[12];
-            if (std::is_same_v<CharT, wchar_t>)
+            if (std::is_same<CharT, wchar_t>::value)
                 std::_snrpintf_s(command, sizeof(command), L"\033[48;5;%dm", code);
             else
                 std::snprintf(command, sizeof(command), "\033[48;5;%dm", code);
@@ -252,7 +252,7 @@ namespace termcolor
         {
         #if defined(TERMCOLOR_USE_ANSI_ESCAPE_SEQUENCES)
             CharT command[20];
-            if (std::is_same_v<CharT, wchar_t>)
+            if (std::is_same<CharT, wchar_t>::value)
                 std::_snrpintf_s(command, sizeof(command), L"\033[38;2;%d;%d;%dm", r, g, b);
             else
                 std::snprintf(command, sizeof(command), "\033[38;2;%d;%d;%dm", r, g, b);
@@ -270,7 +270,7 @@ namespace termcolor
         {
         #if defined(TERMCOLOR_USE_ANSI_ESCAPE_SEQUENCES)
             CharT command[20];
-            if (std::is_same_v<CharT, wchar_t>)
+            if (std::is_same<CharT, wchar_t>::value)
                 std::_snrpintf_s(command, sizeof(command), L"\033[38;2;%d;%d;%dm", r, g, b);
             else
                 std::snprintf(command, sizeof(command), "\033[38;2;%d;%d;%dm", r, g, b);

@@ -36,6 +36,11 @@ configure_package_config_file(
   ${CMAKE_CURRENT_BINARY_DIR}/generated/${PROJECT_NAME}-config.cmake
   INSTALL_DESTINATION lib/cmake/${PROJECT_NAME})
 
+write_basic_package_version_file(
+  ${CMAKE_CURRENT_BINARY_DIR}/generated/${PROJECT_NAME}-config-version.cmake
+  VERSION 2.0.0
+  COMPATIBILITY SameMajorVersion)
+
 install(
   FILES ${CMAKE_CURRENT_BINARY_DIR}/generated/${PROJECT_NAME}-config.cmake
   DESTINATION lib/cmake/${PROJECT_NAME})

@@ -971,7 +971,7 @@ namespace termcolor
         {
             if (&stream == &std::cout)
                 return stdout;
-            else if ((&stream == &std::cerr) || (&stream == &std::clog))
+            else if (&stream == &std::cerr || &stream == &std::clog)
                 return stderr;
 
             return nullptr;
@@ -985,7 +985,7 @@ namespace termcolor
         {
             if (&stream == &std::wcout)
                 return stdout;
-            else if ((&stream == &std::wcerr) || (&stream == &std::wclog))
+            else if (&stream == &std::wcerr || &stream == &std::wclog)
                 return stderr;
 
             return nullptr;
@@ -1044,7 +1044,7 @@ namespace termcolor
             HANDLE hTerminal = INVALID_HANDLE_VALUE;
             if (&stream == &std::cout)
                 hTerminal = GetStdHandle(STD_OUTPUT_HANDLE);
-            else if ((&stream == &std::cerr) || (&stream == &std::clog))
+            else if (&stream == &std::cerr || &stream == &std::clog)
                 hTerminal = GetStdHandle(STD_ERROR_HANDLE);
 
             // save default terminal attributes if it unsaved
@@ -1101,7 +1101,7 @@ namespace termcolor
             HANDLE hTerminal = INVALID_HANDLE_VALUE;
             if (&stream == &std::wcout)
                 hTerminal = GetStdHandle(STD_OUTPUT_HANDLE);
-            else if ((&stream == &std::wcerr) || (&stream == &std::wclog))
+            else if (&stream == &std::wcerr || &stream == &std::wclog)
                 hTerminal = GetStdHandle(STD_ERROR_HANDLE);
 
             // save default terminal attributes if it unsaved

@@ -847,7 +847,7 @@ namespace termcolor
         }
 
         //! Since C++ hasn't a true way to extract stream handler
-        //! from the a given `std::ostream` object, I have to write
+        //! from the a given `std::wostream` object, I have to write
         //! this kind of hack.
         inline
         FILE* get_standard_stream(const std::wostream& stream)
@@ -896,6 +896,7 @@ namespace termcolor
 
     #if defined(TERMCOLOR_TARGET_WINDOWS)
     
+        //! same hack as used in get_standard_stream function, but for Windows with `std::ostream`
         inline HANDLE get_terminal_handle(std::ostream& stream)
         {
             if (&stream == &std::cout)
@@ -904,7 +905,8 @@ namespace termcolor
                 return GetStdHandle(STD_ERROR_HANDLE);
             return nullptr;
         }
-
+        
+        //! same hack as used in get_standard_stream function, but for Windows with `std::wostream`
         inline HANDLE get_terminal_handle(std::wostream& stream)
         {
             if (&stream == &std::wcout)

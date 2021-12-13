@@ -1,0 +1,26 @@
+name: Windows
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:  
+  Windows-EXE:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - run: cmake -DTERMCOLOR_TESTS=ON .
+      - run: cmake --build .
+      - run: ./Debug/test_termcolor.exe
+      
+  Windows-MinGW:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - run: cmake -DCMAKE_SH="CMAKE_SH-NOTFOUND" -DTERMCOLOR_TESTS=ON -G "MinGW Makefiles" .
+      - run: cmake --build .
+      - run: ./test_termcolor

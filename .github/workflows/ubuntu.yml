@@ -1,0 +1,54 @@
+name: Ubuntu
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:  
+  Ubuntu-Clang:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        clang-compiler:
+          - "6.0"
+          - "7"
+          - "8"
+          - "9"
+          - "10"
+          - "11"
+
+    env:
+      CXX: clang++-${{ matrix.clang-compiler }}
+      CXXFLAGS: -std=c++11
+
+    steps:
+      - uses: actions/checkout@v2
+      - run: sudo apt update
+      - run: sudo apt -y install clang-${{ matrix.clang-compiler }}
+      - run: cmake -DTERMCOLOR_TESTS=ON .
+      - run: cmake --build .
+      - run: ./test_termcolor
+
+  Ubuntu-GCC:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        gcc-compiler:
+          - "7"
+          - "8"
+          - "9"
+          - "10"
+
+    env:
+      CXX: g++-${{ matrix.gcc-compiler }}
+      CXXFLAGS: -std=c++11
+
+    steps:
+      - uses: actions/checkout@v2
+      - run: sudo apt update
+      - run: sudo apt -y install g++-${{ matrix.gcc-compiler }}
+      - run: cmake -DTERMCOLOR_TESTS=ON .
+      - run: cmake --build .
+      - run: ./test_termcolor

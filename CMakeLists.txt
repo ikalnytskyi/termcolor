@@ -20,7 +20,7 @@ target_compile_features(${PROJECT_NAME} INTERFACE cxx_std_11)
 option(TERMCOLOR_TESTS "Build termcolor tests." OFF)
 
 if(TERMCOLOR_TESTS)
-  add_executable(test_${PROJECT_NAME} test/test.cpp)
+  add_executable(test_${PROJECT_NAME} test/test.cpp test/subtest.cpp)
   target_link_libraries(
     test_${PROJECT_NAME} ${PROJECT_NAME}::${PROJECT_NAME})
 endif()

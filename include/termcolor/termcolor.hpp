@@ -59,8 +59,8 @@ namespace termcolor
         inline bool is_atty(const std::basic_ostream<CharT>& stream);
 
     #if defined(TERMCOLOR_TARGET_WINDOWS)
-        inline void win_change_attributes(std::ostream& stream, int foreground, int background = -1);
-        inline void win_change_attributes(std::wostream& stream, int foreground, int background = -1);
+        template <typename CharT>
+        inline void win_change_attributes(std::basic_ostream<CharT>& stream, int foreground, int background = -1);
     #endif
     }
 
@@ -895,66 +895,29 @@ namespace termcolor
         }
 
     #if defined(TERMCOLOR_TARGET_WINDOWS)
-        //! Change Windows Terminal colors attribute. If some
-        //! parameter is `-1` then attribute won't changed.
-        inline void win_change_attributes(std::ostream& stream, int foreground, int background)
+    
+        inline HANDLE get_terminal_handle(std::ostream& stream)
         {
-            // yeah, i know.. it's ugly, it's windows.
-            static WORD defaultAttributes = 0;
-
-            // Windows doesn't have ANSI escape sequences and so we use special
-            // API to change Terminal output color. That means we can't
-            // manipulate colors by means of "std::stringstream" and hence
-            // should do nothing in this case.
-            if (!_internal::is_atty(stream))
-                return;
-
-            // get terminal handle
-            HANDLE hTerminal = INVALID_HANDLE_VALUE;
             if (&stream == &std::cout)
-                hTerminal = GetStdHandle(STD_OUTPUT_HANDLE);
+                return GetStdHandle(STD_OUTPUT_HANDLE);
             else if (&stream == &std::cerr || &stream == &std::clog)
-                hTerminal = GetStdHandle(STD_ERROR_HANDLE);
-
-            // save default terminal attributes if it unsaved
-            if (!defaultAttributes)
-            {
-                CONSOLE_SCREEN_BUFFER_INFO info;
-                if (!GetConsoleScreenBufferInfo(hTerminal, &info))
-                    return;
-                defaultAttributes = info.wAttributes;
-            }
-
-            // restore all default settings
-            if (foreground == -1 && background == -1)
-            {
-                SetConsoleTextAttribute(hTerminal, defaultAttributes);
-                return;
-            }
-
-            // get current settings
-            CONSOLE_SCREEN_BUFFER_INFO info;
-            if (!GetConsoleScreenBufferInfo(hTerminal, &info))
-                return;
-
-            if (foreground != -1)
-            {
-                info.wAttributes &= ~(info.wAttributes & 0x0F);
-                info.wAttributes |= static_cast<WORD>(foreground);
-            }
-
-            if (background != -1)
-            {
-                info.wAttributes &= ~(info.wAttributes & 0xF0);
-                info.wAttributes |= static_cast<WORD>(background);
-            }
-
-            SetConsoleTextAttribute(hTerminal, info.wAttributes);
+                return GetStdHandle(STD_ERROR_HANDLE);
+            return nullptr;
         }
 
+        inline HANDLE get_terminal_handle(std::wostream& stream)
+        {
+            if (&stream == &std::wcout)
+                return GetStdHandle(STD_OUTPUT_HANDLE);
+            else if (&stream == &std::wcerr || &stream == &std::wclog)
+                return GetStdHandle(STD_ERROR_HANDLE);
+            return nullptr;
+        }
+        
         //! Change Windows Terminal colors attribute. If some
         //! parameter is `-1` then attribute won't changed.
-        inline void win_change_attributes(std::wostream& stream, int foreground, int background)
+        template <typename CharT>
+        inline void win_change_attributes(std::basic_ostream<CharT>& stream, int foreground, int background)
         {
             // yeah, i know.. it's ugly, it's windows.
             static WORD defaultAttributes = 0;
@@ -968,10 +931,7 @@ namespace termcolor
 
             // get terminal handle
             HANDLE hTerminal = INVALID_HANDLE_VALUE;
-            if (&stream == &std::wcout)
-                hTerminal = GetStdHandle(STD_OUTPUT_HANDLE);
-            else if (&stream == &std::wcerr || &stream == &std::wclog)
-                hTerminal = GetStdHandle(STD_ERROR_HANDLE);
+            hTerminal = get_terminal_handle(stream);
 
             // save default terminal attributes if it unsaved
             if (!defaultAttributes)

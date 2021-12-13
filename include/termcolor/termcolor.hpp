@@ -242,9 +242,9 @@ namespace termcolor
         {
         #if defined(TERMCOLOR_USE_ANSI_ESCAPE_SEQUENCES)
             if (std::is_same<CharT, wchar_t>::value)
-                stream << L"\033[38;5;" << code << L"m";
+                stream << L"\033[38;5;" << +code << L"m";
             else
-                stream << "\033[38;5;" << code << "m";
+                stream << "\033[38;5;" << +code << "m";
         #elif defined(TERMCOLOR_USE_WINDOWS_API)
         #endif
         }
@@ -258,9 +258,9 @@ namespace termcolor
         {
         #if defined(TERMCOLOR_USE_ANSI_ESCAPE_SEQUENCES)
             if (std::is_same<CharT, wchar_t>::value)
-                stream << L"\033[48;5;" << code << L"m";
+                stream << L"\033[48;5;" << +code << L"m";
             else
-                stream << "\033[48;5;" << code << "m";
+                stream << "\033[48;5;" << +code << "m";
         #elif defined(TERMCOLOR_USE_WINDOWS_API)
         #endif
         }
@@ -274,9 +274,9 @@ namespace termcolor
         {
         #if defined(TERMCOLOR_USE_ANSI_ESCAPE_SEQUENCES)
             if (std::is_same<CharT, wchar_t>::value)
-                stream << L"\033[38;2;" << r << L";" << g << L";" << b << L"m";
+                stream << L"\033[38;2;" << +r << L";" << +g << L";" << +b << L"m";
             else
-                stream << "\033[38;2;" << r << ";" << g << ";" << b << "m";
+                stream << "\033[38;2;" << +r << ";" << +g << ";" << +b << "m";
         #elif defined(TERMCOLOR_USE_WINDOWS_API)
         #endif
         }
@@ -290,9 +290,9 @@ namespace termcolor
         {
         #if defined(TERMCOLOR_USE_ANSI_ESCAPE_SEQUENCES)
             if (std::is_same<CharT, wchar_t>::value)
-                stream << L"\033[48;2;" << r << L";" << g << L";" << b << L"m";
+                stream << L"\033[48;2;" << +r << L";" << +g << L";" << +b << L"m";
             else
-                stream << "\033[48;2;" << r << ";" << g << ";" << b << "m";
+                stream << "\033[48;2;" << +r << ";" << +g << ";" << +b << "m";
         #elif defined(TERMCOLOR_USE_WINDOWS_API)
         #endif
         }

@@ -12,16 +12,16 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\include\termcolor\termcolor.hpp" />
-    <ClInclude Include="..\..\test\subtest.hpp">
+    <ClInclude Include="..\include\termcolor\termcolor.hpp" />
+    <ClInclude Include="..\test\subtest.hpp">
       <Filter>test\header</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\test\test.cpp">
+    <ClCompile Include="..\test\test.cpp">
       <Filter>test\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\test\subtest.cpp">
+    <ClCompile Include="..\test\subtest.cpp">
       <Filter>test\source</Filter>
     </ClCompile>
   </ItemGroup>

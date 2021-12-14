@@ -126,43 +126,43 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>..\..\include;$(IncludePath)</IncludePath>
-    <OutDir>$(SolutionDir)..\build\$(Configuration)\</OutDir>
+    <IncludePath>..\include;$(IncludePath)</IncludePath>
+    <OutDir>$(SolutionDir)build\$(Configuration)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug (ANSI)|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>..\..\include;$(IncludePath)</IncludePath>
-    <OutDir>$(SolutionDir)..\build\$(Configuration)\</OutDir>
+    <IncludePath>..\include;$(IncludePath)</IncludePath>
+    <OutDir>$(SolutionDir)build\$(Configuration)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>..\..\include;$(IncludePath)</IncludePath>
-    <OutDir>$(SolutionDir)..\build\$(Configuration)\</OutDir>
+    <IncludePath>..\include;$(IncludePath)</IncludePath>
+    <OutDir>$(SolutionDir)build\$(Configuration)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release (ANSI)|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>..\..\include;$(IncludePath)</IncludePath>
-    <OutDir>$(SolutionDir)..\build\$(Configuration)\</OutDir>
+    <IncludePath>..\include;$(IncludePath)</IncludePath>
+    <OutDir>$(SolutionDir)build\$(Configuration)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>..\..\include;$(IncludePath)</IncludePath>
-    <OutDir>$(SolutionDir)..\build\$(Platform)\$(Configuration)\</OutDir>
+    <IncludePath>..\include;$(IncludePath)</IncludePath>
+    <OutDir>$(SolutionDir)build\$(Platform)\$(Configuration)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug (ANSI)|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>..\..\include;$(IncludePath)</IncludePath>
-    <OutDir>$(SolutionDir)..\build\$(Platform)\$(Configuration)\</OutDir>
+    <IncludePath>..\include;$(IncludePath)</IncludePath>
+    <OutDir>$(SolutionDir)build\$(Platform)\$(Configuration)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>..\..\include;$(IncludePath)</IncludePath>
-    <OutDir>$(SolutionDir)..\build\$(Platform)\$(Configuration)\</OutDir>
+    <IncludePath>..\include;$(IncludePath)</IncludePath>
+    <OutDir>$(SolutionDir)build\$(Platform)\$(Configuration)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release (ANSI)|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>..\..\include;$(IncludePath)</IncludePath>
-    <OutDir>$(SolutionDir)..\build\$(Platform)\$(Configuration)\</OutDir>
+    <IncludePath>..\include;$(IncludePath)</IncludePath>
+    <OutDir>$(SolutionDir)build\$(Platform)\$(Configuration)\</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -277,12 +277,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\include\termcolor\termcolor.hpp" />
-    <ClInclude Include="..\..\test\subtest.hpp" />
+    <ClInclude Include="..\include\termcolor\termcolor.hpp" />
+    <ClInclude Include="..\test\subtest.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\test\subtest.cpp" />
-    <ClCompile Include="..\..\test\test.cpp" />
+    <ClCompile Include="..\test\subtest.cpp" />
+    <ClCompile Include="..\test\test.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

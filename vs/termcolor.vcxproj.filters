@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="test">
+      <UniqueIdentifier>{1176364b-1fb6-48ae-90d3-803012d3b446}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="test\source">
+      <UniqueIdentifier>{641ccd7b-2f2b-4206-ad51-77d95877a44f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="test\header">
+      <UniqueIdentifier>{2b78bc7b-d159-4f69-98a2-b90639dab345}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\include\termcolor\termcolor.hpp" />
+    <ClInclude Include="..\..\test\subtest.hpp">
+      <Filter>test\header</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\test\test.cpp">
+      <Filter>test\source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\test\subtest.cpp">
+      <Filter>test\source</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

@@ -37,6 +37,20 @@ Installation
 * Add ``termcolor.hpp`` (grab it from ``include/termcolor/termcolor.hpp``) to
   the project and use stream manipulators from the ``termcolor`` namespace.
 
+  
+* You can also use tipi.build_ to use the library. Just add to your ``.tipi/deps``:
+
+  .. code:: json
+
+       {
+          "ikalnytskyi/termcolor": { "@": "v2.0.0" }
+       }
+      
+  .. _tipi.build: https://tipi.build/
+
+  Replace the content of the ``@`` section to fetch another tag/branch/release or remove it completely to *live at HEAD*. 
+  A sample project can be found in the ``/examples`` folder of this project.
+
 * You can also use vcpkg_ to install the library:
 
   .. code:: sh

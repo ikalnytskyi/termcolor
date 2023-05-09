@@ -12,6 +12,7 @@
 #ifndef TERMCOLOR_HPP_
 #define TERMCOLOR_HPP_
 
+#include <cstdint>
 #include <iostream>
 
 // Detect target's platform and set some macros in order to wrap platform

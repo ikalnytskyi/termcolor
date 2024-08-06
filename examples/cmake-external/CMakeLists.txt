@@ -1,10 +1,10 @@
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 3.5)
 project(example)
 
 include(ExternalProject)
 
 ExternalProject_Add(termcolor_project
-  GIT_REPOSITORY git://github.com/ikalnytskyi/termcolor.git
+  GIT_REPOSITORY https://github.com/ikalnytskyi/termcolor.git
   GIT_TAG origin/master
 
   # Termcolor is a header-only library which means we need to

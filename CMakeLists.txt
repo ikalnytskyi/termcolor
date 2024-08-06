@@ -1,4 +1,11 @@
 cmake_minimum_required(VERSION 3.0)
+
+if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
+  set(TERMCOLOR_SUBPROJECT OFF)
+else()
+  set(TERMCOLOR_SUBPROJECT OFF)
+endif()
+
 project(termcolor)
 
 #
@@ -29,30 +36,32 @@ endif()
 # install
 #
 
-include(CMakePackageConfigHelpers)
+if(NOT TERMCOLOR_SUBPROJECT)
+  include(CMakePackageConfigHelpers)
 
-# Installation paths
-include(GNUInstallDirs)
+  # Installation paths
+  include(GNUInstallDirs)
 
-configure_package_config_file(
-  cmake/config.cmake.in
-  ${CMAKE_CURRENT_BINARY_DIR}/generated/${PROJECT_NAME}-config.cmake
-  INSTALL_DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME})
+  configure_package_config_file(
+    cmake/config.cmake.in
+    ${CMAKE_CURRENT_BINARY_DIR}/generated/${PROJECT_NAME}-config.cmake
+    INSTALL_DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME})
+  
+  install(
+    FILES ${CMAKE_CURRENT_BINARY_DIR}/generated/${PROJECT_NAME}-config.cmake
+    DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME})
 
-install(
-  FILES ${CMAKE_CURRENT_BINARY_DIR}/generated/${PROJECT_NAME}-config.cmake
-  DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME})
+  install(
+    DIRECTORY include/
+    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
 
-install(
-  DIRECTORY include/
-  DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+  install(
+    TARGETS ${PROJECT_NAME}
+    EXPORT ${PROJECT_NAME}-targets
+    INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
 
-install(
-  TARGETS ${PROJECT_NAME}
-  EXPORT ${PROJECT_NAME}-targets
-  INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
-
-install(
-  EXPORT ${PROJECT_NAME}-targets
-  NAMESPACE ${PROJECT_NAME}::
-  DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME})
+  install(
+    EXPORT ${PROJECT_NAME}-targets
+    NAMESPACE ${PROJECT_NAME}::
+    DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME})
+endif()

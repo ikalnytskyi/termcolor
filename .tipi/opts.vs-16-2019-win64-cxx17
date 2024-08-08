@@ -1,0 +1,2 @@
+# As per README, probably a sane default
+add_compile_definitions( NOMINMAX=1 )

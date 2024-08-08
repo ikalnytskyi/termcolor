@@ -1,0 +1,28 @@
+name: Tipi
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:  
+  tipi-build-linux:
+    runs-on: ubuntu-latest
+    container: tipibuild/tipi-ubuntu
+    
+    env:
+      HOME: /root
+
+    steps:
+      - uses: actions/checkout@v2
+      - run: mkdir -p ~/.tipi
+
+      # checking if the termcolor project itself builds and passes tests
+      - run: tipi . --dont-upgrade --verbose --test all -t linux-cxx17
+      - run: tipi . --dont-upgrade --verbose --test all -t linux-cxx20
+      - run: rm -r ./build
+      
+      # trying if pulling the dependency with tipi works properly
+      - run: tipi ./examples/tipi-simple --dont-upgrade --verbose -t linux-cxx17
+      - run: ./examples/tipi-simple/build/linux-cxx17/bin/example

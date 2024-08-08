@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - run: |
           mkdir -p $GITHUB_WORKSPACE/tmp/termcolor && cd "$_"
           cmake $GITHUB_WORKSPACE
@@ -26,18 +26,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - run: sudo pip install cmake
       - run: |
           mkdir -p $GITHUB_WORKSPACE/tmp/example && cd "$_"
-          /usr/local/bin/cmake $GITHUB_WORKSPACE/examples/cmake-fetch
+          cmake $GITHUB_WORKSPACE/examples/cmake-fetch
           make && ./example
 
   submodule:
     runs-on: ubuntu-latest
     
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - run: |
           mkdir -p $GITHUB_WORKSPACE/tmp/example && cd "$_"
           cmake $GITHUB_WORKSPACE/examples/cmake-submodule
@@ -47,7 +47,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - run: |
           mkdir -p $GITHUB_WORKSPACE/tmp/example && cd "$_"
           cmake $GITHUB_WORKSPACE/examples/cmake-external

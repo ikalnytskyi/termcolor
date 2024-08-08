@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 3.5)
 project(example)
 
 add_subdirectory(../.. ${CMAKE_CURRENT_BINARY_DIR}/termcolor EXCLUDE_FROM_ALL)

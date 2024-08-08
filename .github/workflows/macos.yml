@@ -6,21 +6,23 @@ on:
   pull_request:
     branches: [master]
 
-jobs:      
+jobs:
   MacOS:
     runs-on: macos-latest
     strategy:
       matrix:
         compiler:
-          - Xcode_10.3
-          - Xcode_11.7
-          - Xcode_12.4
+          - Xcode_15.4
+          - Xcode_15.3
+          - Xcode_15.2
+          - Xcode_15.1
+          - Xcode_14.3.1
 
     env:
       CXXFLAGS: -std=c++11
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - run: sudo xcode-select -s /Applications/${{ matrix.compiler }}.app/Contents/Developer
       - run: cmake -DTERMCOLOR_TESTS=ON .
       - run: cmake --build .

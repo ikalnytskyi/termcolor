@@ -61,6 +61,16 @@ Installation
      :alt: Packaging Status
 
 
+The CMake install also provides a ``termcolor.pc`` file for pkg-config. After
+installing Termcolor, use ``pkg-config --cflags termcolor`` to obtain the include
+flags. No linker flags are needed because the library is header-only. When
+installing to a custom prefix, add its ``lib/pkgconfig`` directory (or the
+configured ``CMAKE_INSTALL_LIBDIR`` equivalent) to ``PKG_CONFIG_PATH``.
+
+See ``examples/cmake-pkgconfig`` for a CMake consumer using pkg-config. The
+existing ``find_package(termcolor)`` integration remains available.
+
+
 How to use?
 -----------
 

@@ -151,5 +151,32 @@ int main(int /*argc*/, char** /*argv*/)
         return 2;
 #endif  // NO_ANSI_ESCAPE_SEQUENCES
 
+    // Querying a stream must not write output or affect another stream.
+    std::stringstream queried;
+    std::stringstream other;
+    if (is_colorized(queried))
+        return 3;
+
+    queried << colorize;
+    if (!is_colorized(queried) || is_colorized(other))
+        return 4;
+
+    queried << nocolorize;
+    if (is_colorized(queried) || !queried.str().empty())
+        return 5;
+
+    // The public query supports wide streams as well.
+    std::wstringstream wide;
+    if (is_colorized(wide))
+        return 6;
+
+    wide << colorize;
+    if (!is_colorized(wide))
+        return 7;
+
+    wide << nocolorize;
+    if (is_colorized(wide) || !wide.str().empty())
+        return 8;
+
     return 0;
 }

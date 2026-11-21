@@ -227,6 +227,29 @@ Control manipulators
 #. ``termcolor::nocolorize``
 
 
+Querying colorization
+---------------------
+
+``termcolor::is_colorized(stream)`` reports whether a narrow or wide stream is
+considered colorized. It uses the same decision as the manipulators: a standard
+stream connected to a terminal, or a stream marked with ``termcolor::colorize``.
+Calling ``termcolor::nocolorize`` clears that explicit flag; it does not disable
+automatic terminal detection.
+
+This is useful when buffering output before writing it to another stream:
+
+.. code:: c++
+
+    std::stringstream buffer;
+    if (termcolor::is_colorized(std::cout))
+        buffer << termcolor::colorize;
+    buffer << termcolor::red << "A buffered message" << termcolor::reset;
+    std::cout << buffer.str();
+
+Coloring string streams requires the ANSI escape sequence implementation. On
+Windows, use ``TERMCOLOR_USE_ANSI_ESCAPE_SEQUENCES`` as described above.
+
+
 Caveats
 -------
 

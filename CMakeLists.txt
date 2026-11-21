@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.5)
-project(termcolor)
+project(termcolor VERSION 2.1.0)
 
 #
 # target
@@ -33,6 +33,21 @@ include(CMakePackageConfigHelpers)
 
 # Installation paths
 include(GNUInstallDirs)
+
+if(IS_ABSOLUTE "${CMAKE_INSTALL_INCLUDEDIR}")
+  set(TERMCOLOR_PC_INCLUDEDIR "${CMAKE_INSTALL_INCLUDEDIR}")
+else()
+  set(TERMCOLOR_PC_INCLUDEDIR "\${prefix}/${CMAKE_INSTALL_INCLUDEDIR}")
+endif()
+
+configure_file(
+  cmake/termcolor.pc.in
+  ${CMAKE_CURRENT_BINARY_DIR}/generated/termcolor.pc
+  @ONLY)
+
+install(
+  FILES ${CMAKE_CURRENT_BINARY_DIR}/generated/termcolor.pc
+  DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkgconfig)
 
 configure_package_config_file(
   cmake/config.cmake.in

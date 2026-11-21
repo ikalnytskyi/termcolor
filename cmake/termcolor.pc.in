@@ -1,0 +1,7 @@
+prefix=@CMAKE_INSTALL_PREFIX@
+includedir=@TERMCOLOR_PC_INCLUDEDIR@
+
+Name: termcolor
+Description: Header-only C++ library for printing colored messages to the terminal
+Version: @PROJECT_VERSION@
+Cflags: -I"${includedir}"

@@ -65,6 +65,13 @@ namespace termcolor
     #endif
     }
 
+    // Report the colorization decision used by the stream manipulators.
+    template <typename CharT>
+    bool is_colorized(std::basic_ostream<CharT>& stream)
+    {
+        return _internal::is_colorized(stream);
+    }
+
     template <typename CharT>
     std::basic_ostream<CharT>& colorize(std::basic_ostream<CharT>& stream)
     {
